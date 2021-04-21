@@ -76,11 +76,11 @@ export default {
 <style scoped>
 
 .slide-fade-enter-active {
-  transition: all 0.8s ease;
+  transition: all 0.4s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter, .slide-fade-leave-to
@@ -99,7 +99,7 @@ export default {
 }
 
 .slide-fade-new-enter-active {
-  transition: all 0.8s ease;
+  transition: all 0.4s ease;
 }
 
 .slide-fade-new-leave-active {
@@ -158,6 +158,5 @@ export default {
     opacity: 1;
   }
 }
-
 
 </style>

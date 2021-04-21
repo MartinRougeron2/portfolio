@@ -30,9 +30,9 @@
       </div>
     </q-header>
 
-    <q-page-container>
+    <q-page-container style="background-color: #8e8e8e">
       <transition
-          name="slide-fade"
+          :name="this.$route.path === '/project' ? 'ii-slide-fade' : 'i-slide-fade'"
           mode="out-in"
       >
         <router-view/>
@@ -55,87 +55,49 @@ export default {
   cursor: pointer;
 }
 
-.slide-fade-enter-active {
-  transition: all 0.8s ease;
+.i-slide-fade-enter-active {
+  transition: all 1s ease;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+.i-slide-fade-leave-active {
+  transition: all 1s;
 }
 
-.slide-fade-enter, .slide-fade-leave-to
-  /* .slide-fade-leave-active below version 2.1.8 */
+.i-slide-fade-enter
+  /* .i-slide-fade-leave-active below version 2.1.8 */
 {
-  transform: translateY(100px);
+  transform: translateY(-100vh);
+  opacity: 0;
+
+}
+
+.i-slide-fade-leave-to
+  /* .i-slide-fade-leave-active below version 2.1.8 */
+{
+  transform: translateY(100vh);
   opacity: 0;
 }
 
-
-.search-section-fade {
-  animation: fadein 2s;
-  -moz-animation: fadein 2s; /* Firefox */
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
-  -o-animation: fadein 2s; /* Opera */
+.ii-slide-fade-enter-active {
+  transition: all 2s ease-out;
 }
 
-.slide-fade-new-enter-active {
-  transition: all 0.8s ease;
-}
-
-.slide-fade-new-leave-active {
-  transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-new-enter, .slide-fade-new-leave-to
-  /* .slide-fade-leave-active below version 2.1.8 */
-{
-  transform: translateY(100px);
+.ii-slide-fade-leave-active {
+  transition: all 2s;
   opacity: 0;
 }
 
-.results_search {
-  animation: fadein 2s;
-  -moz-animation: fadein 2s; /* Firefox */
-  -webkit-animation: fadein 2s; /* Safari and Chrome */
-  -o-animation: fadein 2s; /* Opera */
+.ii-slide-fade-enter
+  /* .ii-slide-fade-leave-active below version 2.1.8 */
+{
+  transform: translateY(100vh);
+  opacity: 0;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.ii-slide-fade-leave-to
+  /* .i-slide-fade-leave-active below version 2.1.8 */
+{
+  transform: translateY(-100vh);
 }
 
-@-moz-keyframes fadein {
-  /* Firefox */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadein {
-  /* Safari and Chrome */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@-o-keyframes fadein {
-  /* Opera */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 </style>
