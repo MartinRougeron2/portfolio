@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App ",
+  "productName": "Portfolio",
   "author": "Martin Rougeron <martin.rougeron@epitech.eu>",
   "private": true,
   "scripts": {
