@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md" style="background-color: #8e8e8e">
+  <q-page class="q-pa-md">
     <div class="row justify-center">
       <q-img
           class="rounded-borders col-10 full-height row shadow-10"
