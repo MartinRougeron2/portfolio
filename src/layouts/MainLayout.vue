@@ -32,7 +32,7 @@
 
     <q-page-container style="background-color: #8e8e8e">
       <transition
-          :name="this.$route.path === '/project' ? 'ii-slide-fade' : 'i-slide-fade'"
+          :name="animationName"
           mode="out-in"
       >
         <router-view/>
@@ -45,9 +45,38 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      animationName : ''
+    }
+  },
+  watch: {
+    $route (to, from) {
+      if (to.path === '/project') {
+        this.animationName = 'down-fade'
+        console.log(`if (to.path === '/project') {`)
+        return
+      }
+      if (to.path === '/about') {
+        this.animationName = 'up-fade'
+        console.log(`if (to.path === '/about') {`)
+        return
+      }
+      // to is implicitly => home
+      if (from.path === '/project') {
+        this.animationName = 'up-fade'
+        console.log(`if (from.path === '/project') {`)
+        return
+      }
+      if (from.path === '/about') {
+        this.animationName = 'down-fade'
+        console.log(`if (from.path === '/about') {`)
+        return
+      }
+
+    }
   },
   methods: {}
+
 }
 </script>
 <style scoped>
@@ -55,49 +84,50 @@ export default {
   cursor: pointer;
 }
 
-.i-slide-fade-enter-active {
+.up-fade-enter-active {
   transition: all 1s ease;
 }
 
-.i-slide-fade-leave-active {
+.up-fade-leave-active {
   transition: all 1s;
 }
 
-.i-slide-fade-enter
-  /* .i-slide-fade-leave-active below version 2.1.8 */
+.up-fade-enter
+  /* .up-fade-leave-active below version 2.1.8 */
 {
   transform: translateY(-100vh);
   opacity: 0;
 
 }
 
-.i-slide-fade-leave-to
-  /* .i-slide-fade-leave-active below version 2.1.8 */
+.up-fade-leave-to
+  /* .up-fade-leave-active below version 2.1.8 */
 {
   transform: translateY(100vh);
   opacity: 0;
 }
 
-.ii-slide-fade-enter-active {
-  transition: all 2s ease-out;
+.down-fade-enter-active {
+  transition: all 1s ease;
 }
 
-.ii-slide-fade-leave-active {
-  transition: all 2s;
-  opacity: 0;
+.down-fade-leave-active {
+  transition: all 1s;
 }
 
-.ii-slide-fade-enter
-  /* .ii-slide-fade-leave-active below version 2.1.8 */
+.down-fade-enter
+  /* .down-fade-leave-active below version 2.1.8 */
 {
   transform: translateY(100vh);
   opacity: 0;
+
 }
 
-.ii-slide-fade-leave-to
-  /* .i-slide-fade-leave-active below version 2.1.8 */
+.down-fade-leave-to
+  /* .down-fade-leave-active below version 2.1.8 */
 {
   transform: translateY(-100vh);
+  opacity: 0;
 }
 
 </style>
