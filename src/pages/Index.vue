@@ -28,7 +28,7 @@
           <div
               class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap row justify-center">
             <q-img
-                class="col-10 full-height row shadow-20"
+                class="col-10 full-height row shadow-20 moving-object"
                 :src="item.image_url"
                 style="width: 500px; height: 500px; transition: 0.8s; border-radius: 50px"
                 :ratio="1/2"
@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+
+.moving-object {
+  animation: moving 3s linear infinite;
+}
 
 .slide-fade-enter-active {
   transition: all 0.4s ease;
@@ -254,6 +258,61 @@ export default {
 
 .variation2.pressed {
   color: #5ab9ea;
+}
+
+@keyframes moving {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@-moz-keyframes moving {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(0) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+        transform: translateY(10px) translateX(-10px);
+
+  }
+}
+
+@-webkit-keyframes moving {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(0) translateX(10px);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-10px);
+  }
+  75% {
+        transform: translateY(10px) translateX(0px);
+  }
+}
+
+@-o-keyframes moving {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(0) translateX(10px);
+  }
+  50% {
+    transform: translateY(10px) translateX(0px);
+  }
+  75% {
+      transform: translateY(0px) translateX(-10px);
+  }
 }
 
 </style>

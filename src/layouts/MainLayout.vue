@@ -50,23 +50,19 @@ export default {
     $route (to, from) {
       if (to.path === '/project') {
         this.animationName = 'down-fade'
-        console.log(`if (to.path === '/project') {`)
         return
       }
       if (to.path === '/about') {
-        this.animationName = 'up-fade'
-        console.log(`if (to.path === '/about') {`)
+        this.animationName = 'right-fade'
         return
       }
       // to is implicitly => home
       if (from.path === '/project') {
         this.animationName = 'up-fade'
-        console.log(`if (from.path === '/project') {`)
         return
       }
       if (from.path === '/about') {
-        this.animationName = 'down-fade'
-        console.log(`if (from.path === '/about') {`)
+        this.animationName = 'left-fade'
         return
       }
 
@@ -86,49 +82,95 @@ export default {
 }
 
 .up-fade-enter-active {
-  transition: all 0.4s ease;
+  transition: all 0.6s ease;
 }
 
 .up-fade-leave-active {
-  transition: all 0.4s;
+  transition: all 0.6s;
 }
 
 .up-fade-enter
   /* .up-fade-leave-active below version 2.1.8 */
 {
-  transform: translateY(-10vh);
-  opacity: 0;
+  transform: translateY(-100vh);
+  opacity: 0.5;
 
 }
 
 .up-fade-leave-to
   /* .up-fade-leave-active below version 2.1.8 */
 {
-  transform: translateY(10vh);
-  opacity: 0;
+  transform: translateY(100vh);
+  opacity: 0.5;
 }
 
 .down-fade-enter-active {
-  transition: all 0.4s ease;
+  transition: all 0.6s ease;
 }
 
 .down-fade-leave-active {
-  transition: all 0.4s;
+  transition: all 0.6s;
 }
 
 .down-fade-enter
   /* .down-fade-leave-active below version 2.1.8 */
 {
-  transform: translateY(10vh);
-  opacity: 0;
+  transform: translateY(100vh);
+  opacity: 0.5;
 
 }
 
 .down-fade-leave-to
   /* .down-fade-leave-active below version 2.1.8 */
 {
-  transform: translateY(-10vh);
-  opacity: 0;
+  transform: translateY(-100vh);
+  opacity: 0.5;
+}
+
+.right-fade-enter-active {
+  transition: all 0.6s ease;
+}
+
+.right-fade-leave-active {
+  transition: all 0.6s;
+}
+
+.right-fade-enter
+  /* .right-fade-leave-active below version 2.1.8 */
+{
+  transform: translateX(100vw);
+  opacity: 0.5;
+
+}
+
+.right-fade-leave-to
+  /* .right-fade-leave-active below version 2.1.8 */
+{
+  transform: translateX(-100vw);
+  opacity: 0.5;
+}
+
+.left-fade-enter-active {
+  transition: all 0.6s ease;
+}
+
+.left-fade-leave-active {
+  transition: all 0.6s;
+}
+
+.left-fade-enter
+  /* .left-fade-leave-active below version 2.1.8 */
+{
+  transform: translateX(-100vw);
+  opacity: 0.5;
+
+}
+
+.left-fade-leave-to
+  /* .left-fade-leave-active below version 2.1.8 */
+{
+  transform: translateX(100vw);
+  opacity: 0.5;
 }
 
 </style>

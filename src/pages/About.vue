@@ -1,6 +1,8 @@
 <template>
-  <q-page>
-    <timeline />
+  <q-page class="row justify-center">
+    <div class="col-7 shadow-10 q-mt-xl" style="border-radius: 50px; background-color: white">
+      <timeline />
+    </div>
   </q-page>
 </template>
 
@@ -17,29 +19,5 @@ export default {
 </script>
 
 <style scoped>
-
-i-slide-fade-enter-active {
-  transition: all 1s ease;
-}
-
-.i-slide-fade-leave-active {
-  transition: all 1s;
-}
-
-.i-slide-fade-enter
-  /* .i-slide-fade-leave-active below version 2.1.8 */
-{
-  transform: translateY(100vh);
-  opacity: 0;
-
-}
-
-.i-slide-fade-leave-to
-  /* .i-slide-fade-leave-active below version 2.1.8 */
-{
-  transform: translateY(-100vh);
-  opacity: 0;
-}
-
 
 </style>
