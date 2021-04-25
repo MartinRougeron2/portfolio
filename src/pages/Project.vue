@@ -12,8 +12,25 @@
         Project {{ project.name }}
       </div>
     </div>
-    <div class="flex flex-center text-h6">
-      {{ project.description }}
+    <div class="row justify-start q-pl-xl q-pa-md text-h4">
+        <div class="col-7 text-justify">
+          <div class="q-pa-md">
+            {{ project.text1 }}
+          </div>
+        </div>
+        <div class="flex flex-center q-ml-xl text-h2">
+          TEXT
+        </div>
+    </div>
+    <div class="row justify-end q-pl-xl q-pa-md text-h4">
+      <div class="flex flex-center q-mr-xl text-h2">
+        TEXT
+      </div>
+      <div class="col-7 text-justify">
+        <div class="q-pa-md">
+          {{ project.text2 }}
+        </div>
+      </div>
     </div>
   </q-page>
 </template>

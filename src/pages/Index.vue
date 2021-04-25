@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="row justify-center col-12 text-white">
       <div class="flex flex-center basic-text col-12 basic-text" style="font-size: 50px; color: darkblue">
-        Projects
+        WORKS
       </div>
       <q-carousel
           v-model="slide"
@@ -40,8 +40,8 @@
                   <div class="col-12 text-h4 flex flex-center">
                       Project
                   </div>
-                  <div class="col-12 text-h2 flex flex-center">
-                    {{ item.name }}
+                  <div class="col-12 text-h3 flex flex-center">
+                      {{ item.name }}
                   </div>
                   <q-separator style="width: 40vw" inset="item" color="white" size="2px" />
                   <div class="col-10 text-h5 flex flex-center">
@@ -54,10 +54,14 @@
                     rounded
                     color="white"
                     class="col-6 shadow-4"
-                    style="height: 50px"
+                    style="height: 15%"
+                    text-color="secondary"
                     @click="$router.push({path: '/project', query: {name: item.name}})"
                 >
-                  <q-icon name="arrow_downward" color="blue" />
+                  <div class="row justify-center">
+                    <p class="col-12"> SHOW ME MORE </p>
+                    <q-icon name="arrow_downward" color="secondary" />
+                  </div>
                 </q-btn>
                 </div>
               </transition>
@@ -265,53 +269,34 @@ export default {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
 }
 
 @-moz-keyframes moving {
   0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  25% {
-    transform: translateY(0) translateX(10px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px) translateX(-10px);
-  }
-  75% {
-        transform: translateY(10px) translateX(-10px);
-
+    transform: translateY(10px);
   }
 }
 
 @-webkit-keyframes moving {
   0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  25% {
-    transform: translateY(0) translateX(10px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px) translateX(-10px);
-  }
-  75% {
-        transform: translateY(10px) translateX(0px);
+    transform: translateY(10px);
   }
 }
 
 @-o-keyframes moving {
   0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  25% {
-    transform: translateY(0) translateX(10px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(10px) translateX(0px);
-  }
-  75% {
-      transform: translateY(0px) translateX(-10px);
+    transform: translateY(10px);
   }
 }
 
