@@ -14,10 +14,10 @@
           control-color="white"
           infinite
           padding
-          arrows
-          height="70vh"
-          class="text-white shadow-10 rounded-borders q-mt-lg"
-          style="width: 50vw; margin-top: 80px; background-color: #3030b8"
+          :arrows="!$q.screen.xs && $q.screen.sm"
+          :height="$q.screen.name === 'xs' ? '45vh' : '70vh'"
+          class="text-white shadow-10 rounded-borders q-mt-lg col-sm-11 col-xs-11 col-md-6 col-lg-5 col-xl-5"
+          style="margin-top: 80px; background-color: #3030b8"
       >
         <q-carousel-slide
             v-for="item in projects"
@@ -30,7 +30,7 @@
             <q-img
                 class="col-10 full-height row shadow-20 moving-object"
                 :src="item.image_url"
-                style="width: 500px; height: 500px; transition: 0.8s; border-radius: 50px"
+                style="transition: 0.8s; border-radius: 50px"
                 :ratio="1/2"
                 @mouseenter="l = item.name"
                 @mouseleave="l = ''"
@@ -59,7 +59,7 @@
                     @click="$router.push({path: '/project', query: {name: item.name}})"
                 >
                   <div class="row justify-center">
-                    <p class="col-12"> SHOW ME MORE </p>
+                    <p class="col-12 xs-hide"> SHOW ME MORE </p>
                     <q-icon name="arrow_downward" color="secondary" />
                   </div>
                 </q-btn>
