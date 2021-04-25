@@ -5,7 +5,7 @@
       <div class="q-mt-md row justify-between">
         <div class="col-4">
           <div class="q-ml-xl q-mt-md name basic-text" style="font-size: 15px; color: darkblue" @click="$router.push('/')">
-            <q-icon name="home" size="large" />
+            <q-icon v-show="$q.screen.xs" name="home" size="large" />
             <div v-show="!$q.screen.xs">
               MARTIN ROUGERON
             </div>
