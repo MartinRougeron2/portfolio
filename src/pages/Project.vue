@@ -19,12 +19,12 @@
           </div>
         </div>
         <div class="flex flex-center q-ml-xl text-h2">
-          TEXT
+          Project Goal
         </div>
     </div>
     <div class="row justify-end q-pl-xl q-pa-md text-h4">
       <div class="flex flex-center q-mr-xl text-h2">
-        TEXT
+        Achievements
       </div>
       <div class="col-7 text-justify">
         <div class="q-pa-md">
