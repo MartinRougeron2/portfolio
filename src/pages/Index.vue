@@ -14,7 +14,7 @@
           control-color="white"
           infinite
           padding
-          :arrows="!$q.screen.xs && $q.screen.sm"
+          :arrows="!($q.screen.xs && $q.screen.sm)"
           :height="$q.screen.name === 'xs' ? '45vh' : '70vh'"
           class="text-white shadow-10 rounded-borders q-mt-lg col-sm-11 col-xs-11 col-md-6 col-lg-5 col-xl-5"
           style="margin-top: 80px; background-color: #3030b8"
