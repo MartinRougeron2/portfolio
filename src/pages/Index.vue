@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="row justify-center col-12 text-white">
       <div class="flex flex-center basic-text col-12 basic-text" style="font-size: 50px; color: darkblue">
-        WORKS
+        MY WORKS
       </div>
       <q-carousel
           v-model="slide"

@@ -1,5 +1,14 @@
 <template>
   <q-page class="q-pa-md">
+    <div class="go-to-top">
+      <q-btn
+        class="bg-dark"
+        round
+        to="/"
+      >
+        <q-icon name="expand_less" />
+      </q-btn>
+    </div>
     <div class="row justify-center">
       <q-img
           class="rounded-borders col-10 full-height row shadow-10"
@@ -56,6 +65,7 @@
         </div>
       </div>
     </div>
+
   </q-page>
 </template>
 
@@ -81,3 +91,19 @@ export default {
   }
 }
 </script>
+<style>
+.go-to-top {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+</style>
