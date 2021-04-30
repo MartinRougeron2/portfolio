@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="xs-show sm-show">
+    <div class="md-hide lg-hide xl-hide">
       <div class="row justify-center q-pl-xl-xl q-pa-md" style="font-size: min(20px, 4vw)">
         <div class="flex flex-center col-10 q-mt-lg text-h3">
           Project Goal
