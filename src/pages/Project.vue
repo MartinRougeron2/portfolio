@@ -82,8 +82,6 @@ export default {
   },
   created() {
     projects.forEach(project => {
-      console.log(project.name)
-      console.log(this.$route.query.name)
       if (project.name === this.$route.query?.name) {
         this.project = project
       }

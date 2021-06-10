@@ -65,7 +65,6 @@ export default {
       }
       if (from.path === '/about') {
         this.animationName = 'left-fade'
-        return
       }
 
     }

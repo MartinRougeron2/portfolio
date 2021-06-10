@@ -14,7 +14,7 @@ export default {
   components: {
     Timeline
   },
-  name: ""
+  name: "About"
 }
 </script>
 

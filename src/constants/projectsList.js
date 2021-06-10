@@ -5,10 +5,8 @@ let projects = [
         description: 'Create your own rpg',
         image_url: 'https://camo.githubusercontent.com/8ec620767c42e957a476a6f585c188005992f3db8801396848fd720827f1ae66/68747470733a2f2f706f7274666f6c696f2d6d617274696e2d726f756765726f6e2e6e65746c6966792e6170702f496c6c757374726174696f6e2f7270672e706e67',
         link_url: 'rpg',
-        text1 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a arcu orci. Praesent sem erat, cursus eget pretium et, placerat a nibh. Morbi porta sollicitudin porta. Nulla iaculis lectus vel libero vehicula consequat suscipit et nisi. Ut dapibus finibus mi, in dignissim nunc congue ut. Donec iaculis eu libero ac consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent mollis neque ut lorem fermentum cursus. Aenean sed vestibulum.',
-        text2 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a arcu orci. Praesent sem erat, cursus eget pretium et, placerat a nibh. Morbi porta sollicitudin porta. Nulla iaculis lectus vel libero vehicula consequat suscipit et nisi. Ut dapibus finibus mi, in dignissim nunc congue ut. Donec iaculis eu libero ac consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent mollis neque ut lorem fermentum cursus. Aenean sed vestibulum.',
-        text3 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a arcu orci. Praesent sem erat, cursus eget pretium et, placerat a nibh. Morbi porta sollicitudin porta. Nulla iaculis lectus vel libero vehicula consequat suscipit et nisi. Ut dapibus finibus mi, in dignissim nunc congue ut. Donec iaculis eu libero ac consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent mollis neque ut lorem fermentum cursus. Aenean sed vestibulum.',
-        text4 : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a arcu orci. Praesent sem erat, cursus eget pretium et, placerat a nibh. Morbi porta sollicitudin porta. Nulla iaculis lectus vel libero vehicula consequat suscipit et nisi. Ut dapibus finibus mi, in dignissim nunc congue ut. Donec iaculis eu libero ac consectetur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent mollis neque ut lorem fermentum cursus. Aenean sed vestibulum.'
+        text1 : '',
+        text2 : '',
     },
     {
         name: 'Tetris',
