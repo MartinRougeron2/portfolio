@@ -1,69 +1,78 @@
 <template>
   <div
-              class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap row justify-center">
-            <q-img
-                class="col-10 full-height row shadow-20 moving-object"
-                :src="project.image_url"
-                style="transition: 0.8s; border-radius: 50px"
-                :ratio="1/2"
-                @mouseenter="l = project.name"
-                @mouseleave="l = ''"
-            >
-              <transition name="slide-fade" mode="in-out">
-                <div v-show="l === project.name" class="absolute-full row justify-center" style="background-color: #3030b8">
-                  <div class="col-12 text-h4 flex flex-center">
-                      Project
-                  </div>
-                  <div class="col-12 text-h3 flex flex-center">
-                      {{ project.name }}
-                  </div>
-                  <q-separator style="width: 40vw" inset="item" color="white" size="2px" />
-                  <div class="col-10 text-h5 flex flex-center">
-                    Description
-                  </div>
-                  <div class="col-12 text-subtitle1 flex flex-center">
-                    {{ project.description }}
-                  </div>
-                <q-btn
-                    rounded
-                    color="white"
-                    class="col-6 shadow-4"
-                    style="height: 15%"
-                    text-color="secondary"
-                    @click="
-                    $router.push({path: '/project', query: {name: project.name}})
-"
-                >
-                  <div class="row justify-center">
-                    <p class="col-12 xs-hide"> SHOW ME MORE </p>
-                    <q-icon name="arrow_downward" color="secondary" />
-                  </div>
-                </q-btn>
-                </div>
-              </transition>
-            </q-img>
+    class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap row justify-center"
+  >
+    <q-img
+      class="col-10 full-height row shadow-20 moving-object"
+      :src="project.image_url"
+      style="transition: 0.8s; border-radius: 50px"
+      :ratio="1 / 2"
+      @mouseenter="l = project.name"
+      @mouseleave="l = ''"
+    >
+      <transition name="slide-fade" mode="in-out">
+        <div
+          v-show="l === project.name"
+          class="absolute-full row justify-center"
+          style="background-color: #3030b8"
+        >
+          <div class="col-12 text-h4 flex flex-center">
+            Project
           </div>
+          <div class="col-12 text-h3 flex flex-center">
+            {{ project.name }}
+          </div>
+          <q-separator
+            style="width: 40vw"
+            inset="item"
+            color="white"
+            size="2px"
+          />
+          <div class="col-10 text-h5 flex flex-center">
+            Description
+          </div>
+          <div class="col-12 text-subtitle1 flex flex-center">
+            {{ project.description }}
+          </div>
+          <q-btn
+            rounded
+            color="white"
+            class="col-6 shadow-4"
+            style="height: 15%"
+            text-color="secondary"
+            @click="
+              $router.push({ path: '/project', query: { name: project.name } })
+            "
+          >
+            <div class="row justify-center">
+              <p class="col-12 xs-hide">SHOW ME MORE</p>
+              <q-icon name="arrow_downward" color="secondary" />
+            </div>
+          </q-btn>
+        </div>
+      </transition>
+    </q-img>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'projectPresentation',
-    props: {
-        project: {
-            type: Object,
-            required: true
-        }
-    },
-    data() {
-        return {
-            l: ''
-        }
+  name: "projectPresentation",
+  props: {
+    project: {
+      type: Object,
+      required: true
     }
-}
+  },
+  data() {
+    return {
+      l: ""
+    };
+  }
+};
 </script>
 
 <style>
-
 .moving-object {
   animation: moving 3s linear infinite;
 }
@@ -78,11 +87,10 @@ export default {
 
 .slide-fade-enter, .slide-fade-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */
-{
+ {
   transform: translateY(60vh);
   opacity: 0;
 }
-
 
 .search-section-fade {
   animation: fadein 2s;
@@ -101,7 +109,7 @@ export default {
 
 .slide-fade-new-enter, .slide-fade-new-leave-to
   /* .slide-fade-leave-active below version 2.1.8 */
-{
+ {
   transform: translateY(100px);
   opacity: 0;
 }
@@ -153,7 +161,8 @@ export default {
 }
 
 @keyframes moving {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -162,7 +171,8 @@ export default {
 }
 
 @-moz-keyframes moving {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -171,7 +181,8 @@ export default {
 }
 
 @-webkit-keyframes moving {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -180,7 +191,8 @@ export default {
 }
 
 @-o-keyframes moving {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
