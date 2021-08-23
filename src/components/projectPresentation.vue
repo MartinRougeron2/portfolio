@@ -30,7 +30,9 @@
                     class="col-6 shadow-4"
                     style="height: 15%"
                     text-color="secondary"
-                    @click="$router.push({path: '/project', query: {name: project.name}})"
+                    @click="
+                    $router.push({path: '/project', query: {name: project.name}})
+"
                 >
                   <div class="row justify-center">
                     <p class="col-12 xs-hide"> SHOW ME MORE </p>

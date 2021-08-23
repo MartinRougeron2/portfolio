@@ -25,7 +25,7 @@
             :name="item.name"
             class="column no-wrap flex-center q-pa-md"
         >
-          <!--project-presentation :project="item" /-->
+          <project-presentation :project="item" />
         </q-carousel-slide>
       </q-carousel>
 
@@ -35,18 +35,18 @@
 
 <script>
 
-// import { projects } from '../constants/projectsList.js'
-// import projectPresentation from '../components/projectPresentation.vue'
+import { projects } from '../constants/projectsList.js'
+import projectPresentation from '../components/projectPresentation.vue'
 
 export default {
   name: 'PageIndex',
   components: {
-    // projectPresentation
+    projectPresentation
   },
   data() {
     return {
       slide: 'my_RPG',
-      projects: [] //projects,
+      projects: projects,
     }
   }
 }
