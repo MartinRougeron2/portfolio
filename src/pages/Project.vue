@@ -80,7 +80,7 @@
       <div
         v-for="(feature, index) in project.features"
         :key="index"
-        class="q-ma-md col-8"
+        class="q-ma-md col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-7 "
       >
         <div class="text-h5 q-py-lg"> 
           {{ feature.text }}

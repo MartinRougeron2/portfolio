@@ -19,11 +19,14 @@
           <div class="col-12 text-h4 flex flex-center">
             Project
           </div>
-          <div class="col-12 text-h3 flex flex-center">
+          <div v-if="!$q.screen.xs" class="col-12 text-h3 flex flex-center">
+            {{ project.name }}
+          </div>
+          <div v-else class="col-10 text-h5 flex flex-center">
             {{ project.name }}
           </div>
           <q-separator
-            style="width: 40vw"
+            style="width: 100vw"
             inset="item"
             color="white"
             size="2px"
