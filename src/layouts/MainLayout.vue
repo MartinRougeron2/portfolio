@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     goToGithub() {
-      document.location.href = 'https://www.github.com';
+      document.location.href = 'https://github.com/MartinRougeron2/';
     }
   }
 
