@@ -25,7 +25,7 @@
         class="row justify-start q-pl-xl-xl q-pa-md"
         style="font-size: min(20px, 4vw)"
       >
-        <div class="col-7 text-justify">
+        <div class="col-7 text-right">
           <div class="q-pa-md">
             {{ project.text1 }}
           </div>
@@ -82,8 +82,8 @@
         :key="index"
         class="q-ma-md col-xs-12 col-sm-10 col-md-8 col-lg-8 col-xl-7 "
       >
-        <div class="text-h5 q-py-lg"> 
-          {{ feature.text }}
+        <div class="text-h5 q-py-lg">
+          <div v-html="feature.text"></div>
         </div>
         <q-img :src="feature.image_url"> </q-img>
       </div>

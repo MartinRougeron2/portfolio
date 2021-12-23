@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      slide: 'my_RPG',
+      slide: 'Babel',
       projects: projects,
     }
   }
