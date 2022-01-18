@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="go-to-top">
       <q-btn class="bg-dark" round to="/">
-        <q-icon name="expand_less" />
+        <q-icon name="home" />
       </q-btn>
     </div>
     <div class="row justify-center">
@@ -88,6 +88,18 @@
         <q-img :src="feature.image_url"> </q-img>
       </div>
     </div>
+    <div style="width: 100%" class="row justify-center">
+      <q-btn flat
+             @click="goToNextProject">
+
+        <template v-slot:default>
+          <p class="text-h6 col-12 text-center">
+            Next project : {{ nextProject.name }}
+          </p>
+          <q-icon name="expand_more" class="move-infinite"/>
+        </template>
+      </q-btn>
+    </div>
   </q-page>
 </template>
 
@@ -98,16 +110,39 @@ export default {
   name: "Project",
   data() {
     return {
-      project: {}
+      project: {},
+      projectIndex: 0,
     };
   },
-  created() {
-    projects.forEach(project => {
-      if (project.name === this.$route.query?.name) {
-        this.project = project;
-      }
-    });
-  }
+  mounted() {
+    this.pickProject();
+  },
+  watch: {
+    $route() {
+      this.pickProject();
+    }
+  },
+  methods: {
+    goToNextProject() {
+      this.$router.replace({ path: 'project', query: {name: this.nextProject.name} }).catch();
+    },
+    pickProject() {
+      let index = 0;
+      this.projectIndex = 0;
+      projects.forEach(project => {
+        if (project.name === this.$route.query?.name) {
+          this.project = project;
+          this.projectIndex = index;
+        }
+        index++;
+      });
+    }
+  },
+  computed: {
+    nextProject() {
+      return projects[(this.projectIndex + 1) % projects.length];
+    }
+  },
 };
 </script>
 <style>
