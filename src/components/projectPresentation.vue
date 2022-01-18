@@ -44,7 +44,7 @@
             style="height: 15%"
             text-color="secondary"
             @click="
-              $router.push({ name: 'project', params: {project: project.name } })
+              $router.push({ path: 'project', query: {name: project.name } })
             "
           >
             <div class="row justify-center">
