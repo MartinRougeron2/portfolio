@@ -48,12 +48,12 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if (from.name === 'project' && to.name === 'project') {
+      if (from.path === '/project' && to.path === '/project') {
         console.log("oho")
         this.animationName = 'up-fade'
         return;
       }
-      if (to.name === 'project') {
+      if (to.path === '/project') {
         this.animationName = 'down-fade'
         return
       }
@@ -62,7 +62,7 @@ export default {
         return
       }
       // to is implicitly => home
-      if (from.name === 'project') {
+      if (from.path === '/project') {
         this.animationName = 'up-fade'
         return
       }

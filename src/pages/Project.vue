@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="go-to-top">
       <q-btn class="bg-dark" round to="/">
-        <q-icon name="home"/>
+        <q-icon name="home" />
       </q-btn>
     </div>
     <div class="row justify-center">
@@ -85,7 +85,7 @@
         <div class="text-h5 q-py-lg">
           <div v-html="feature.text"></div>
         </div>
-        <q-img v-if="feature.image_url" :src="feature.image_url" :ratio="2"></q-img>
+        <q-img :src="feature.image_url"> </q-img>
       </div>
     </div>
     <div style="width: 100%" class="row justify-center">
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import {projects} from "../constants/projectsList";
+import { projects } from "../constants/projectsList";
 
 export default {
   name: "Project",
@@ -114,22 +114,28 @@ export default {
       projectIndex: 0,
     };
   },
+  mounted() {
+    this.pickProject();
+  },
+  watch: {
+    $route() {
+      this.pickProject();
+    }
+  },
   methods: {
+    goToNextProject() {
+      this.$router.replace({ path: 'project', query: {name: this.nextProject.name} }).catch();
+    },
     pickProject() {
       let index = 0;
       this.projectIndex = 0;
-
       projects.forEach(project => {
-        if (project.name === this.$route.params.project) {
+        if (project.name === this.$route.query?.name) {
           this.project = project;
           this.projectIndex = index;
         }
-        index++
+        index++;
       });
-    },
-    goToNextProject() {
-      this.$router.push({ name: 'project', params: {project: this.nextProject.name} });
-      document.location.reload()
     }
   },
   computed: {
@@ -137,14 +143,6 @@ export default {
       return projects[(this.projectIndex + 1) % projects.length];
     }
   },
-  watch: {
-    $route() {
-      this.pickProject();
-    }
-  },
-  mounted() {
-    this.pickProject();
-  }
 };
 </script>
 <style>
@@ -161,18 +159,5 @@ export default {
   cursor: pointer;
   padding: 15px;
   border-radius: 4px;
-}
-
-@keyframes up-down {
-  0% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(5px);
-  }
-}
-
-.move-infinite {
-  animation: up-down 1s infinite alternate;
 }
 </style>
