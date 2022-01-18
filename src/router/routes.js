@@ -6,7 +6,8 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Index.vue') },
       { path: 'about', component: () => import('pages/About') },
-      { path: 'project', component: () => import('pages/Project') },
+      { name: 'project',  path: 'projects/:project', component: () => import('pages/Project') },
+      { name: 'django', path: 'django', component: () => import('pages/DjangoRedirect')}
     ],
   },
 

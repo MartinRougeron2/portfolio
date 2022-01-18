@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="go-to-top">
       <q-btn class="bg-dark" round to="/">
-        <q-icon name="home" />
+        <q-icon name="home"/>
       </q-btn>
     </div>
     <div class="row justify-center">
@@ -85,7 +85,7 @@
         <div class="text-h5 q-py-lg">
           <div v-html="feature.text"></div>
         </div>
-        <q-img :src="feature.image_url"> </q-img>
+        <q-img v-if="feature.image_url" :src="feature.image_url" :ratio="2"></q-img>
       </div>
     </div>
     <div style="width: 100%" class="row justify-center">
@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import { projects } from "../constants/projectsList";
+import {projects} from "../constants/projectsList";
 
 export default {
   name: "Project",
@@ -114,6 +114,7 @@ export default {
       projectIndex: 0,
     };
   },
+
   mounted() {
     this.pickProject();
   },
@@ -136,6 +137,7 @@ export default {
         }
         index++;
       });
+
     }
   },
   computed: {
@@ -159,5 +161,18 @@ export default {
   cursor: pointer;
   padding: 15px;
   border-radius: 4px;
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.move-infinite {
+  animation: up-down 1s infinite alternate;
 }
 </style>

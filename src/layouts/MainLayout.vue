@@ -29,14 +29,12 @@
       </div>
     </q-header>
 
-    <q-page-container style="background-color: #eaeaea">
       <transition
           :name="animationName"
           mode="out-in"
       >
         <router-view/>
       </transition>
-    </q-page-container>
 
   </q-layout>
 </template>
@@ -50,7 +48,12 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if (to.path === '/project') {
+      if (from.name === 'project' && to.name === 'project') {
+        console.log("oho")
+        this.animationName = 'up-fade'
+        return;
+      }
+      if (to.name === 'project') {
         this.animationName = 'down-fade'
         return
       }
@@ -59,14 +62,13 @@ export default {
         return
       }
       // to is implicitly => home
-      if (from.path === '/project') {
+      if (from.name === 'project') {
         this.animationName = 'up-fade'
         return
       }
       if (from.path === '/about') {
         this.animationName = 'left-fade'
       }
-
     }
   },
   methods: {
