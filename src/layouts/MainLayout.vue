@@ -33,7 +33,7 @@
           :name="animationName"
           mode="out-in"
       >
-        <router-view/>
+        <router-view :key="'a' + $route.query.name"/>
       </transition>
 
   </q-layout>
@@ -50,7 +50,7 @@ export default {
     $route (to, from) {
       if (from.path === '/project' && to.path === '/project') {
         console.log("oho")
-        this.animationName = 'up-fade'
+        this.animationName = 'down-big-fade'
         return;
       }
       if (to.path === '/project') {
@@ -174,6 +174,29 @@ export default {
 {
   transform: translateX(100vw);
   opacity: 0.5;
+}
+
+
+
+.down-big-fade-enter-active {
+  transition: all 1s ease;
+}
+
+.down-big-fade-leave-active {
+  transition: all 0.2s;
+}
+
+.down-big-fade-enter
+  /* .down-big-fade-leave-active below version 2.1.8 */
+{
+  transform: translateY(100vh);
+
+}
+
+.down-big-fade-leave-to
+  /* .down-big-fade-leave-active below version 2.1.8 */
+{
+  opacity: 0;
 }
 
 </style>

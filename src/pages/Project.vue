@@ -5,7 +5,7 @@
         <q-icon name="home" />
       </q-btn>
     </div>
-    <div class="row justify-center">
+    <div class="row justify-center" style="margin-top: 80px">
       <q-img
         class="rounded-borders col-10 full-height row shadow-10"
         :src="project.image_url"
@@ -23,7 +23,7 @@
     <div class="xs-hide sm-hide">
       <div
         class="row justify-start q-pl-xl-xl q-pa-md"
-        style="font-size: min(20px, 4vw)"
+        style="font-size: 2rem"
       >
         <div class="col-7 text-right">
           <div class="q-pa-md">
@@ -36,7 +36,7 @@
       </div>
       <div
         class="row justify-end q-pl-xl-xl q-pa-md"
-        style="font-size: min(20px, 4vw)"
+        style="font-size: 2rem"
       >
         <div class="flex flex-center q-mr-xl text-h2">
           Achievements
@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     goToNextProject() {
-      this.$router.replace({ path: 'project', query: {name: this.nextProject.name} }).catch();
+      this.$router.push({ path: 'project', query: {name: this.nextProject.name} }).catch();
     },
     pickProject() {
       let index = 0;

@@ -1,6 +1,7 @@
 let projects = [
   {
     name: `Babel`,
+    color: '#ffffff',
     description: `How to recreate Skype in C++ with Qt & Portaudio`,
     image_url: `https://www.tomsguide.fr/content/uploads/sites/2/2019/02/skype-enregistrer-appel-3.png`,
     link_url: `babel`,
@@ -23,6 +24,7 @@ let projects = [
   },
   {
     name: `Redditech`,
+    color: '#ffffff',
     description: `With Reddit API, I recreate my own Reddit App.`,
     image_url: `/redditech.png`,
     link_url: `redditech`,
@@ -56,6 +58,7 @@ let projects = [
   },
   {
     name: `Dashboard`,
+    color: '#ffffff',
     description: `With a friend, we create a dashboard.`,
     image_url: `/dashboard.png`,
     link_url: `dashboard`,
@@ -89,6 +92,7 @@ let projects = [
   },
   {
     name: `my_RPG`,
+    color: '#ffffff',
     description: `I create my own RPG w/ my 3 friends for a school project`,
     image_url: `https://camo.githubusercontent.com/8ec620767c42e957a476a6f585c188005992f3db8801396848fd720827f1ae66/68747470733a2f2f706f7274666f6c696f2d6d617274696e2d726f756765726f6e2e6e65746c6966792e6170702f496c6c757374726174696f6e2f7270672e706e67`,
     link_url: `rpg`,
