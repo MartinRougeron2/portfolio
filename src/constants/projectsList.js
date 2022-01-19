@@ -16,6 +16,7 @@ let projects = [
       {text: `Then, we create a acquisition sound system thanks to Portaudio.`},
       {
         text: `The last part was to connect every part to have a sound transmission system.`,
+        image_url: 'uml_babel.png'
       },
       {
         text: `In bonus, we added a graphic interface with Qt`,

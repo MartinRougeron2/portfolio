@@ -85,7 +85,9 @@
         <div class="text-h5 q-py-lg">
           <div v-html="feature.text"></div>
         </div>
-        <q-img :src="feature.image_url"> </q-img>
+        <a :href="feature.image_url">
+        <q-img :src="feature.image_url" class="shadow-3"> </q-img>
+        </a>
       </div>
     </div>
     <div style="width: 100%" class="row justify-center">
@@ -159,5 +161,18 @@ export default {
   cursor: pointer;
   padding: 15px;
   border-radius: 4px;
+}
+
+@keyframes mo {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.move-infinite {
+  transition: 1s infinite mo;
 }
 </style>
