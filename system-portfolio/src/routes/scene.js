@@ -7,10 +7,11 @@ import { Vector3 } from 'three';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
 let window;
-const dist = 1.3
-let mouse = new THREE.Vector2();
+const dist = 1.3;
+let mouse = new THREE.Vector2(3, 3);
 let animation = true;
-
+let intersect;
+var selected;
 class Circle {
 	constructor(radius) {
 		let pts = new THREE.Path().absarc(0, 0, radius, 0, Math.PI * 2).getPoints(90);
@@ -25,14 +26,11 @@ class Circle {
 	}
 }
 const sun = new THREE.Object3D();
-sun.name = "sun";
+sun.name = 'sun';
+sun.userData = projects.sun;
 let renderer;
 var planets = [];
 var time = 0;
-const mat = new THREE.MeshPhongMaterial({
-	color: 0xffffff,
-	flatShading: true
-});
 let particle = new THREE.Object3D();
 const geometry = new THREE.TetrahedronGeometry(2, 0);
 const material = new THREE.MeshPhongMaterial({
@@ -41,6 +39,7 @@ const material = new THREE.MeshPhongMaterial({
 });
 var lights = [];
 var lightsSide = [];
+let raycaster = new THREE.Raycaster();
 
 sun.add(
 	new THREE.Mesh(
@@ -52,15 +51,35 @@ sun.add(
 	)
 );
 
+let skelet = new THREE.Object3D();
+scene.add(skelet);
+var mat2 = new THREE.MeshPhongMaterial({
+	color: 0xffffff,
+	wireframe: true,
+	side: THREE.DoubleSide
+});
+
+var geom2 = new THREE.IcosahedronGeometry(1, 1);
+var planet2 = new THREE.Mesh(geom2, mat2);
+planet2.scale.x = planet2.scale.y = planet2.scale.z = 1;
+skelet.add(planet2);
+skelet.visible = false;
+
 camera.position.z = 1050;
 camera.position.x = 50;
 camera.position.y = 1050;
 camera.lookAt(0, 0, 0);
 
-for (const project of projects) {
+for (const project of projects.projects) {
 	const planet = new THREE.Object3D();
 	planet.add(
-		new THREE.Mesh(new THREE.IcosahedronGeometry(project.size, project.size > 4 ? 1 : 0), mat)
+		new THREE.Mesh(
+			new THREE.IcosahedronGeometry(project.size, project.size > 4 ? 1 : 0),
+			new THREE.MeshPhongMaterial({
+				color: 0xffffff,
+				flatShading: true
+			})
+		)
 	);
 	project.speed = randInt(5, 20);
 	project.time = time;
@@ -109,8 +128,10 @@ const animate = () => {
 	requestAnimationFrame(animate);
 	planets.forEach((planet) => {
 		planet.rotation.y += 0.005 * (8 - planet.userData.size);
-		planet.position.x = -Math.cos(planet.userData.time) * (10 * dist * (4.5 - planet.userData.year));
-		planet.position.z = -Math.sin(planet.userData.time) * (10 * dist * (4.5 - planet.userData.year));
+		planet.position.x =
+			-Math.cos(planet.userData.time) * (10 * dist * (0.5 + planet.userData.year));
+		planet.position.z =
+			-Math.sin(planet.userData.time) * (10 * dist * (0.5 + planet.userData.year));
 		planet.userData.time += 0.0025;
 	});
 	const time = Date.now() * 0.0005;
@@ -125,16 +146,52 @@ const animate = () => {
 	particle.rotation.x += 0.0;
 	particle.rotation.y -= 0.002;
 	sun.rotation.y += 0.005;
+	const speeds = (distance) => {
+		if (distance > 150) return 10;
+		return 5;
+	};
 
 	if (animation) {
-		camera.position.y -= camera.position.y > 150 ? 10 : 5;
-		camera.position.z -= camera.position.z > 150 ? 10 : 5;
+		camera.position.y -= speeds(camera.position.y);
+		camera.position.z -= speeds(camera.position.z);
 		if (camera.position.y <= 50) {
 			animation = false;
 		}
 		camera.lookAt(0, 0, 0);
 	}
 
+	raycaster.setFromCamera(mouse, camera);
+	var intersects = raycaster.intersectObjects([...planets, sun], true);
+
+	if (intersect) {
+		// reset
+		intersect.material.color.set(0xffffff);
+	}
+	if (intersects.length > 0 && !animation) {
+		document.body.style.cursor = 'pointer';
+		var object = intersects[0].object;
+		intersect = object;
+		// reset
+		object.material.color.set(0xbdbdbd);
+	} else {
+		document.body.style.cursor = 'default';
+		if (intersect) {
+			// reset
+			intersect.material.color.set(0xffffff);
+			intersect = null;
+		}
+	}
+
+	if (selected) {
+		skelet.visible = true;
+		skelet.position.copy(selected.position);
+		const size = selected.userData.size + 2;
+		skelet.scale.set(size, size, size);
+		localStorage.setItem('project', JSON.stringify(selected.userData));
+	} else {
+		localStorage.setItem('project', null);
+		skelet.visible = false;
+	}
 
 	renderer.render(scene, camera);
 };
@@ -145,21 +202,34 @@ const resize = (width, height) => {
 	camera.updateProjectionMatrix();
 };
 
-function onDocumentMouseMove( event )
-{
-	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+function onDocumentMouseMove(event) {
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
-export const createScene = (el, _window) => {
+function onDocumentMouseClick(event) {
+	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+	raycaster.setFromCamera(mouse, camera);
+	var intersects = raycaster.intersectObjects([...planets, sun], true);
+
+	if (intersects.length > 0) {
+		selected = intersects[0].object.parent;
+	} else {
+		selected = null;
+	}
+}
+
+export const createScene = (el, _window, document) => {
 	window = _window;
 	const controls = new TREE.OrbitControls(camera, el);
-	renderer = new THREE.WebGLRenderer({antialias: true, canvas: el, alpha: true});
+	renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el, alpha: true });
 	resize(_window.innerWidth, _window.innerHeight);
 	animate();
 	controls.update();
 	_window.addEventListener('resize', resize);
 
 	// when the mouse moves, call the given function
-	document.addEventListener('mousemove', onDocumentMouseMove, false);
-}
+	_window.addEventListener('mousemove', onDocumentMouseMove, false);
+	_window.addEventListener('mousedown', onDocumentMouseClick, false);
+};

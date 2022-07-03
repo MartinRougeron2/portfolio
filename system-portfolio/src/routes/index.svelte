@@ -1,10 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
 	import { createScene } from './scene';
+	import Project from '../lib/Project.svelte';
 	let el;
+	let animation = true;
+
 	onMount(() => {
-		createScene(el, window);
+		createScene(el, window, document);
 	});
+
+	setTimeout(() => (animation = false), 2000);
 </script>
 
 <svelte:head>
@@ -14,7 +19,10 @@
 
 <section>
 	<div>
-		<canvas bind:this={el}></canvas>
+		<canvas bind:this={el} />
+		{#if !animation}
+			<Project />
+		{/if}
 	</div>
 </section>
 
