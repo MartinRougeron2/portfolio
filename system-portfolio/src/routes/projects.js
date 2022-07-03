@@ -1,0 +1,57 @@
+class Project {
+	constructor(name, description, images, size, year) {
+		this.name = name;
+		this.description = description;
+		this.images = images;
+		this.size = size;
+		this.year = year;
+	}
+}
+
+let projects = [
+	new Project(
+		'Area',
+		'My own Zapier. With 4 other tek students, we build an action-reaction website. You want to send an email each time you send a discord message ? Done ! You want to create an event each time you receive a Slack message ? Done !',
+		[],
+		7,
+		3
+	),
+	new Project(
+		'My RPG',
+		'Our own RPG Game ! Fight monsters, dragons and more to get 3 artifacts to free your village. My most fun work.',
+		[],
+		5,
+		1
+	),
+	new Project(
+		'Babel',
+		"Do you know Skype ? Do you know it's possible to create your version ? With 2 friends, we create a voIP system in 1 month.",
+		[],
+		5,
+		3
+	),
+	new Project(
+		'Dashboard',
+		'You want to have a website featuring your most wanted apps ? The Dashboard ! Add Widgets to listen to Spotify, get some recipies, some cools pictures !',
+		[],
+		3,
+		3
+	),
+	new Project(
+		'BomberMan',
+		'Bomberman is one of the most fun game, but you need to be on the same computer to play (at its release) ... So we create a multi player game and playable from 1 to 4 by network. ',
+		[],
+		4,
+		2
+	),
+	new Project(
+		'NanotekSpice',
+		'A C++ project to simulate a hardware piece working, you give a model, some input and simulate the output !',
+		[],
+		2,
+		2
+	),
+	new Project('Plazza', 'Your own pizzeria with a multithreading kitchen', [], 2, 2)
+];
+
+export default projects;

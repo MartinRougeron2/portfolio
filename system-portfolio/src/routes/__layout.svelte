@@ -8,3 +8,11 @@
 <main>
 	<slot />
 </main>
+
+<style>
+	main {
+		background: #444444;
+		height: 100vh;
+		width: 100vw;
+	}
+</style>
