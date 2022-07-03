@@ -45,7 +45,7 @@ sun.add(
 	new THREE.Mesh(
 		new THREE.IcosahedronGeometry(8, 3),
 		new THREE.MeshPhongMaterial({
-			color: 0xffffff,
+			color: 0xe0e0e0,
 			flatShading: true
 		})
 	)
@@ -76,7 +76,7 @@ for (const project of projects.projects) {
 		new THREE.Mesh(
 			new THREE.IcosahedronGeometry(project.size, project.size > 4 ? 1 : 0),
 			new THREE.MeshPhongMaterial({
-				color: 0xffffff,
+				color: 0xe0e0e0,
 				flatShading: true
 			})
 		)
@@ -165,19 +165,19 @@ const animate = () => {
 
 	if (intersect) {
 		// reset
-		intersect.material.color.set(0xffffff);
+		intersect.material.color.set(0xe0e0e0);
 	}
 	if (intersects.length > 0 && !animation) {
 		document.body.style.cursor = 'pointer';
 		var object = intersects[0].object;
 		intersect = object;
 		// reset
-		object.material.color.set(0xbdbdbd);
+		object.material.color.set(0xffffff);
 	} else {
 		document.body.style.cursor = 'default';
 		if (intersect) {
 			// reset
-			intersect.material.color.set(0xffffff);
+			intersect.material.color.set(0xe0e0e0);
 			intersect = null;
 		}
 	}
@@ -187,7 +187,6 @@ const animate = () => {
 		skelet.position.copy(selected.position);
 		const size = selected.userData.size + 2;
 		skelet.scale.set(size, size, size);
-		localStorage.setItem('project', JSON.stringify(selected.userData));
 	} else {
 		localStorage.setItem('project', null);
 		skelet.visible = false;
@@ -208,6 +207,7 @@ function onDocumentMouseMove(event) {
 }
 
 function onDocumentMouseClick(event) {
+	if (event.toElement.id === "next" || event.toElement.id === "about") return;
 	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 	raycaster.setFromCamera(mouse, camera);
@@ -215,6 +215,8 @@ function onDocumentMouseClick(event) {
 
 	if (intersects.length > 0) {
 		selected = intersects[0].object.parent;
+		intersects[0].object.material.color.set(0xffffff);
+		localStorage.setItem('project', JSON.stringify(selected.userData));
 	} else {
 		selected = null;
 	}

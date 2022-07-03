@@ -1,25 +1,43 @@
 <script>
 	import { browser } from '$app/env';
+	import projects from "../routes/projects.js";
 	let projectSelected;
 	setInterval(() => {
 		if (browser) {
 			projectSelected = JSON.parse(localStorage.project);
 		}
 	}, 300);
+
+	function nextProject() {
+		let nextId = ( projectSelected.index + 1)
+		if (nextId === projects.projects.length) {
+			localStorage.setItem("project", JSON.stringify(projects.sun));
+			return;
+		}
+		for (const project of projects.projects) {
+			if (project.index === nextId) {
+				localStorage.setItem("project", JSON.stringify(project));
+				return;
+			}
+		}
+
+	}
+
 </script>
 
 <section>
 	<div class="project p-4">
 		{#if projectSelected}
 			<div class="card">
-				<div class="title p-2">
+				<div class="title p-2 flex justify-between">
 					{projectSelected.name}
+					<button class="mr-3" on:click={nextProject} id="next"> > </button>
 				</div>
 				<div class="description">
 					{projectSelected.description}
 				</div>
-				<div class="github-link p-1 m-1">
-					<a href="/{projectSelected.page}" class="flex justify-center">About this project</a>
+				<div class="github-link p-1 m-1 mt-5">
+					<a href="/{projectSelected.page}" class="flex justify-center" id="about">About this project</a>
 				</div>
 			</div>
 		{:else}
@@ -33,7 +51,7 @@
 		top: 25vh;
 		right: 10px;
 		position: absolute;
-		width: 400px;
+		width: min(400px, calc(95vw - 10px));
 		color: white;
 		font-family: Arial, Helvetica, sans-serif;
 		-webkit-backdrop-filter: blur(10px);
