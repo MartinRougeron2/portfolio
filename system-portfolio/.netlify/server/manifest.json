@@ -1,0 +1,158 @@
+{
+  ".svelte-kit/build/index.js": {
+    "file": "index.js",
+    "src": ".svelte-kit/build/index.js",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.js"
+    ]
+  },
+  "src/routes/stores.js": {
+    "file": "entries/endpoints/stores.js",
+    "src": "src/routes/stores.js",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/scene.js": {
+    "file": "entries/endpoints/scene.js",
+    "src": "src/routes/scene.js",
+    "isEntry": true,
+    "imports": [
+      "src/routes/projects.js"
+    ]
+  },
+  "src/routes/projects.js": {
+    "file": "entries/endpoints/projects.js",
+    "src": "src/routes/projects.js",
+    "isEntry": true
+  },
+  "src/routes/__layout.svelte": {
+    "file": "entries/pages/__layout.svelte.js",
+    "src": "src/routes/__layout.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ],
+    "css": [
+      "assets/entries/pages/__layout.svelte-6248a1ce.css"
+    ],
+    "assets": [
+      "assets/fira-mono-cyrillic-ext-400-normal-3df7909e.woff2",
+      "assets/fira-mono-all-400-normal-1e3b098c.woff",
+      "assets/fira-mono-cyrillic-400-normal-c7d433fd.woff2",
+      "assets/fira-mono-greek-ext-400-normal-9e2fe623.woff2",
+      "assets/fira-mono-greek-400-normal-a8be01ce.woff2",
+      "assets/fira-mono-latin-ext-400-normal-6bfabd30.woff2",
+      "assets/fira-mono-latin-400-normal-e43b3538.woff2"
+    ]
+  },
+  ".svelte-kit/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "src": ".svelte-kit/runtime/components/error.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/about-me.svelte": {
+    "file": "entries/pages/about-me.svelte.js",
+    "src": "src/routes/about-me.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/area.svelte": {
+    "file": "entries/pages/area.svelte.js",
+    "src": "src/routes/area.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/babel.svelte": {
+    "file": "entries/pages/babel.svelte.js",
+    "src": "src/routes/babel.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/bomberman.svelte": {
+    "file": "entries/pages/bomberman.svelte.js",
+    "src": "src/routes/bomberman.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/contact.svelte": {
+    "file": "entries/pages/contact.svelte.js",
+    "src": "src/routes/contact.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ],
+    "css": [
+      "assets/entries/pages/contact.svelte-9766c1a2.css"
+    ]
+  },
+  "src/routes/dashboard.svelte": {
+    "file": "entries/pages/dashboard.svelte.js",
+    "src": "src/routes/dashboard.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/index.svelte": {
+    "file": "entries/pages/index.svelte.js",
+    "src": "src/routes/index.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js",
+      "src/routes/scene.js",
+      "src/routes/projects.js"
+    ],
+    "css": [
+      "assets/entries/pages/index.svelte-42d09f5b.css"
+    ]
+  },
+  "src/routes/my-rpg.svelte": {
+    "file": "entries/pages/my-rpg.svelte.js",
+    "src": "src/routes/my-rpg.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/nanotekspice.svelte": {
+    "file": "entries/pages/nanotekspice.svelte.js",
+    "src": "src/routes/nanotekspice.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "src/routes/plazza.svelte": {
+    "file": "entries/pages/plazza.svelte.js",
+    "src": "src/routes/plazza.svelte",
+    "isEntry": true,
+    "imports": [
+      "_index-43ce8bc5.js"
+    ]
+  },
+  "_index-43ce8bc5.js": {
+    "file": "chunks/index-43ce8bc5.js"
+  },
+  "src/hooks.js": {
+    "file": "chunks/hooks-ff4815b6.js",
+    "src": "src/hooks.js",
+    "isDynamicEntry": true
+  }
+}
