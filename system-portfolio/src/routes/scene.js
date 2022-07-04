@@ -1,8 +1,10 @@
 import * as THREE from 'three';
-import {OrbitControls} from "./OrbitControls.js";
-import projects from './projects.js';
-import { randInt } from 'three/src/math/MathUtils.js';
 import { Vector3 } from 'three';
+
+import {OrbitControls} from "./OrbitControls.js";
+import { randInt } from './MathUtils.js';
+
+import projects from './projects.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
