@@ -60,10 +60,12 @@
 
 	.loading {
 		position: absolute;
-		left: 45vw;
+		left: calc(50vw - 200px);
+		right: auto;
 		top: 50vh;
+		text-align: center;
 		background: transparent;
-		width: 200px;
+		width: 400px;
 		height: 200px;
 		color: white;
 		font-weight: 900;

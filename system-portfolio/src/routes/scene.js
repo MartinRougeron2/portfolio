@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import projects from './projects.js';
-import * as TREE from 'three/examples/jsm/controls/OrbitControls.js';
 import { randInt } from 'three/src/math/MathUtils.js';
 import { Vector3 } from 'three';
 
@@ -222,9 +221,12 @@ function onDocumentMouseClick(event) {
 	}
 }
 
+	import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 export const createScene = (el, _window, document) => {
+
+
 	window = _window;
-	const controls = new TREE.OrbitControls(camera, el);
+	const controls = new OrbitControls(camera, el);
 	renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el, alpha: true });
 	resize(_window.innerWidth, _window.innerHeight);
 	animate();
