@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {OrbitControls} from "./OrbitControls.js";
 import projects from './projects.js';
 import { randInt } from 'three/src/math/MathUtils.js';
 import { Vector3 } from 'three';
@@ -221,7 +222,6 @@ function onDocumentMouseClick(event) {
 	}
 }
 
-	import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 export const createScene = (el, _window, document) => {
 
 
