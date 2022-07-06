@@ -1,23 +1,27 @@
 <script>
 	import { onMount } from 'svelte';
-	import { createScene } from './scene';
+	import { createScene } from '../lib/3d/scene.js';
 	import Project from '../lib/Project.svelte';
 	let el;
 	let animation = true;
-	let display = "display: none";
-	let displayLoading = "display: inline";
+	let display = 'display: none';
+	let displayLoading = 'display: inline';
+	let loadingText = 'Reaching the planets';
 
 	onMount(() => {
 		createScene(el, window, document);
 	});
-
+	const load = setInterval(() => {
+		loadingText += '.';
+	}, 150);
 	setTimeout(() => {
 		animation = false;
-	}, 2000);
+	}, 4500);
 	setTimeout(() => {
 		displayLoading = display;
-		display = "display: block";
-	}, 200);
+		display = 'display: block';
+		clearInterval(load);
+	}, 600);
 </script>
 
 <svelte:head>
@@ -28,7 +32,7 @@
 <section>
 	<div>
 		<div class="loading" style={displayLoading}>
-			Reaching the planets...
+			{loadingText}
 		</div>
 		<div style={display}>
 			<canvas bind:this={el} />

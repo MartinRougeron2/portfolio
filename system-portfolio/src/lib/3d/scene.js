@@ -1,19 +1,12 @@
 import * as THREE from 'three';
 import { Vector3 } from 'three';
 
-import {OrbitControls} from "./OrbitControls.js";
+import { OrbitControls } from './OrbitControls.js';
 import { randInt } from './MathUtils.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import projects from './projects.js';
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
-let window;
-const dist = 1.3;
-let mouse = new THREE.Vector2(3, 3);
-let animation = true;
-let intersect;
-var selected;
 class Circle {
 	constructor(radius) {
 		let pts = new THREE.Path().absarc(0, 0, radius, 0, Math.PI * 2).getPoints(90);
@@ -27,9 +20,16 @@ class Circle {
 		this.line.name = `orbit ${radius}`;
 	}
 }
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
+let window;
+const dist = 1.3;
+let mouse = new THREE.Vector2(3, 3);
+let animation = true;
+let intersect;
+var selected;
 const sun = new THREE.Object3D();
-sun.name = 'sun';
-sun.userData = projects.sun;
 let renderer;
 var planets = [];
 var time = 0;
@@ -42,7 +42,17 @@ const material = new THREE.MeshPhongMaterial({
 var lights = [];
 var lightsSide = [];
 let raycaster = new THREE.Raycaster();
+let skelet = new THREE.Object3D();
+var geom2 = new THREE.IcosahedronGeometry(1, 1);
+var mat2 = new THREE.MeshPhongMaterial({
+	color: 0xffffff,
+	wireframe: true,
+	side: THREE.DoubleSide
+});
+var planet2 = new THREE.Mesh(geom2, mat2);
 
+sun.name = 'sun';
+sun.userData = projects.sun;
 sun.add(
 	new THREE.Mesh(
 		new THREE.IcosahedronGeometry(8, 3),
@@ -53,23 +63,12 @@ sun.add(
 	)
 );
 
-let skelet = new THREE.Object3D();
-scene.add(skelet);
-var mat2 = new THREE.MeshPhongMaterial({
-	color: 0xffffff,
-	wireframe: true,
-	side: THREE.DoubleSide
-});
-
-var geom2 = new THREE.IcosahedronGeometry(1, 1);
-var planet2 = new THREE.Mesh(geom2, mat2);
 planet2.scale.x = planet2.scale.y = planet2.scale.z = 1;
-skelet.add(planet2);
 skelet.visible = false;
 
-camera.position.z = 1050;
+camera.position.z = 550;
 camera.position.x = 50;
-camera.position.y = 1050;
+camera.position.y = 550;
 camera.lookAt(0, 0, 0);
 
 for (const project of projects.projects) {
@@ -83,6 +82,32 @@ for (const project of projects.projects) {
 			})
 		)
 	);
+	const loader = new GLTFLoader().setPath('models/');
+
+	loader.load(
+		'model_sword.gltf',
+		function (gltf) {
+			console.log(gltf);
+
+			gltf.scene.children.forEach((mesh) => {
+				mesh.material = new THREE.MeshPhongMaterial({
+				color: 0xe0e0e0,
+				flatShading: true
+			});
+			})
+			gltf.scene.position.x = -4
+			gltf.scene.position.y = 2
+			gltf.scene.position.z = -5
+			gltf.scene.scale.x = 0.5
+			gltf.scene.scale.y = 0.5
+			gltf.scene.scale.z = 0.5
+			planets[1].add(gltf.scene);
+		},
+		undefined,
+		function (error) {
+			console.error(error);
+		}
+	);
 	project.speed = randInt(5, 20);
 	project.time = time;
 	time += randInt(10, 20) / 10;
@@ -92,7 +117,7 @@ for (const project of projects.projects) {
 	scene.add(planet);
 }
 
-for (var i = 0; i < 1000; i++) {
+for (var i = 0; i < 200; i++) {
 	var mesh = new THREE.Mesh(geometry, material);
 	mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
 	mesh.position.multiplyScalar(90 + Math.random() * 700);
@@ -125,6 +150,8 @@ scene.add(lights[2]);
 scene.add(lightsSide[0]);
 scene.add(lightsSide[1]);
 scene.add(lightsSide[2]);
+scene.add(skelet);
+skelet.add(planet2);
 
 const animate = () => {
 	requestAnimationFrame(animate);
@@ -147,7 +174,7 @@ const animate = () => {
 	});
 	particle.rotation.x += 0.0;
 	particle.rotation.y -= 0.002;
-	sun.rotation.y += 0.005;
+	// sun.rotation.y += 0.005;
 	const speeds = (distance) => {
 		if (distance > 150) return 10;
 		return 5;
@@ -209,7 +236,7 @@ function onDocumentMouseMove(event) {
 }
 
 function onDocumentMouseClick(event) {
-	if (event.toElement.id === "next" || event.toElement.id === "about") return;
+	if (event.toElement.id === 'next' || event.toElement.id === 'about') return;
 	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 	raycaster.setFromCamera(mouse, camera);
@@ -225,8 +252,6 @@ function onDocumentMouseClick(event) {
 }
 
 export const createScene = (el, _window, document) => {
-
-
 	window = _window;
 	const controls = new OrbitControls(camera, el);
 	renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el, alpha: true });

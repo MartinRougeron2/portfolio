@@ -1,28 +1,26 @@
 <script>
 	import { browser } from '$app/env';
-	import projects from "../routes/projects.js";
+	import projects from './3d/projects.js';
 	let projectSelected;
 	setInterval(() => {
 		if (browser) {
 			projectSelected = JSON.parse(localStorage.project);
 		}
-	}, 300);
+	}, 100);
 
 	function nextProject() {
-		let nextId = ( projectSelected.index + 1)
+		let nextId = projectSelected.index + 1;
 		if (nextId === projects.projects.length) {
-			localStorage.setItem("project", JSON.stringify(projects.sun));
+			localStorage.setItem('project', JSON.stringify(projects.sun));
 			return;
 		}
 		for (const project of projects.projects) {
 			if (project.index === nextId) {
-				localStorage.setItem("project", JSON.stringify(project));
+				localStorage.setItem('project', JSON.stringify(project));
 				return;
 			}
 		}
-
 	}
-
 </script>
 
 <section>
@@ -31,17 +29,32 @@
 			<div class="card">
 				<div class="title p-2 flex justify-between">
 					{projectSelected.name}
-					<button class="mr-3" on:click={nextProject} id="next"> > </button>
+					<button
+						class="mr-3 title lg:invisible xl:invisible 2xl:invisible"
+						on:click={nextProject}
+						id="next"
+					>
+						Next >
+					</button>
 				</div>
 				<div class="description">
 					{projectSelected.description}
 				</div>
 				<div class="github-link p-1 m-1 mt-5">
-					<a href="/{projectSelected.page}" class="flex justify-center" id="about">About this project</a>
+					<a href="/{projectSelected.page}" class="flex justify-center" id="about"
+						>About this project</a
+					>
 				</div>
 			</div>
 		{:else}
-			<div class="title">Click on planets !</div>
+			<div class="title">
+				Click on planets !
+				<div class="description">
+					<br />
+					Each planet is a project,<br />
+					Planet size is Project size
+				</div>
+			</div>
 		{/if}
 	</div>
 </section>
@@ -87,5 +100,9 @@
 
 	.github-link:hover {
 		background: rgba(0, 0, 255, 0.4);
+	}
+
+	#next {
+		text-decoration: white solid underline;
 	}
 </style>

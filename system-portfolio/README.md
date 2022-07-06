@@ -2,7 +2,7 @@
 
 ## Developing
 
-Once you've  installed dependencies with `yarn`, start a development server:
+Once you've installed dependencies with `yarn`, start a development server:
 
 ```bash
 npm run dev
