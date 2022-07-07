@@ -7,10 +7,37 @@
 	let display = 'display: none';
 	let displayLoading = 'display: inline';
 	let loadingText = 'Reaching the planets';
-	import model from '$lib/3d/model_sword.js'
+	import bomb from '$lib/3d/models/bomb.js';
+	import cap from '$lib/3d/models/cap.js';
+	import chart from '$lib/3d/models/chart.js';
+	import chip from '$lib/3d/models/chip.js';
+	import phone from '$lib/3d/models/phone.js';
+	//import pizza from '$lib/3d/models/pizza.js';
+	import sword from '$lib/3d/models/sword.js';
+	import web from '$lib/3d/models/web.js';
+
+	class ProjectDecoration {
+		constructor(model, position, scale, project_index) {
+			this.model = model;
+			this.position = position;
+			this.scale = scale;
+			this.project_index = project_index;
+		}
+	}
+
+	const models = [
+		new ProjectDecoration(bomb, { x: 0, y: 6, z: 0 }, 7, 4),
+		new ProjectDecoration(sword, { x: -4, y: 6.5, z: -4 }, 0.5, 1),
+		new ProjectDecoration(web, { x: 0, y: 7, z: 0 }, 1, 0),
+		new ProjectDecoration(phone, { x: 0, y: 6, z: 0 }, 1, 2),
+		new ProjectDecoration(chart, { x: 0, y: 6, z: 0 }, 10, 3),
+		new ProjectDecoration(chip, { x: -3, y: -3, z: 22 }, 0.2, 5),
+		//new ProjectDecoration(pizza, { x: 0, y: 6, z: 0 }, 1, 6),
+		new ProjectDecoration(cap, { x: 0, y: 8.5, z: 0 }, 2, -1)
+	];
 
 	onMount(() => {
-		createScene(el, window, document, model);
+		createScene(el, window, document, models);
 	});
 	const load = setInterval(() => {
 		loadingText += '.';

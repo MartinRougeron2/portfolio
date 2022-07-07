@@ -86,35 +86,38 @@ for (const project of projects.projects) {
 	project.time = time;
 	time += randInt(10, 20) / 10;
 	planet.userData = project;
-	planet.name = `planet ${project.name}`;
+	planet.name = 'planet';
 	planets.push(planet);
 	scene.add(planet);
 }
 
+const loader = new GLTFLoader();
 
-const loader = new GLTFLoader()
-
-function load_model(model, planet_index) {
-
-
+function load_model(model, planet_index, scale, position) {
 	loader.parse(
-		model, '',
+		model,
+		'',
 		function (gltf) {
 			console.log(gltf);
 
 			gltf.scene.children.forEach((mesh) => {
 				mesh.material = new THREE.MeshPhongMaterial({
-				color: 0xe0e0e0,
-				flatShading: true
+					color: 0xe0e0e0,
+					flatShading: true
+				});
 			});
-			})
-			gltf.scene.position.x = -4
-			gltf.scene.position.y = 4
-			gltf.scene.position.z = -5
-			gltf.scene.scale.x = 0.5
-			gltf.scene.scale.y = 0.5
-			gltf.scene.scale.z = 0.5
-			planets[planet_index].add(gltf.scene);
+			gltf.scene.scale.x = scale;
+			gltf.scene.scale.y = scale;
+			gltf.scene.scale.z = scale;
+			gltf.scene.position.x = position.x;
+			gltf.scene.position.y = position.y;
+			gltf.scene.position.z = position.z;
+			gltf.scene.name = 'decoration';
+			if (planet_index >= 0) planets[planet_index].add(gltf.scene);
+			else {
+				console.log(position);
+				sun.add(gltf.scene);
+			}
 		},
 		undefined,
 		function (error) {
@@ -122,7 +125,6 @@ function load_model(model, planet_index) {
 		}
 	);
 }
-
 
 for (var i = 0; i < 200; i++) {
 	var mesh = new THREE.Mesh(geometry, material);
@@ -162,15 +164,15 @@ skelet.add(planet2);
 
 const animate = () => {
 	requestAnimationFrame(animate);
+	const time = Date.now() * 0.0005;
 	planets.forEach((planet) => {
-		planet.rotation.y += 0.005 * (8 - planet.userData.size);
+		planet.rotation.y += time * 0.00000000002
 		planet.position.x =
 			-Math.cos(planet.userData.time) * (10 * dist * (0.5 + planet.userData.year));
 		planet.position.z =
 			-Math.sin(planet.userData.time) * (10 * dist * (0.5 + planet.userData.year));
-		planet.userData.time += 0.0025;
+		planet.userData.time += time * 0.000000000008;
 	});
-	const time = Date.now() * 0.0005;
 	lights.forEach((light) => {
 		light.position.x = -Math.cos(time);
 		light.position.z = -Math.sin(time);
@@ -180,7 +182,7 @@ const animate = () => {
 		light.position.z = Math.sin(time);
 	});
 	particle.rotation.x += 0.0;
-	particle.rotation.y -= 0.002;
+	particle.rotation.y -= 0.001;
 	sun.rotation.y += 0.005;
 	const speeds = (distance) => {
 		if (distance > 150) return 10;
@@ -250,7 +252,18 @@ function onDocumentMouseClick(event) {
 	var intersects = raycaster.intersectObjects([...planets, sun], true);
 
 	if (intersects.length > 0) {
+		console.log(intersects);
 		selected = intersects[0].object.parent;
+		while (
+			selected.name !== 'decoration' &&
+			selected.name !== 'planet' &&
+			selected.name !== 'sun'
+		) {
+			selected = selected.parent;
+		}
+		if (selected.name === 'decoration') {
+			selected = selected.parent;
+		}
 		intersects[0].object.material.color.set(0xffffff);
 		localStorage.setItem('project', JSON.stringify(selected.userData));
 	} else {
@@ -258,15 +271,17 @@ function onDocumentMouseClick(event) {
 	}
 }
 
-export const createScene = (el, _window, document, path) => {
+export const createScene = (el, _window, document, models) => {
 	window = _window;
-	load_model(path, 1)
+	models.forEach((model) => {
+		load_model(model.model, model.project_index, model.scale, model.position);
+	});
 	const controls = new OrbitControls(camera, el);
 	renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el, alpha: true });
 	resize(_window.innerWidth, _window.innerHeight);
 	animate();
 	controls.update();
-	_window.addEventListener('resize', resize);
+	_window.addEventListener('resize', resize(_window.innerWidth, _window.innerHeight));
 
 	// when the mouse moves, call the given function
 	_window.addEventListener('mousemove', onDocumentMouseMove, false);
