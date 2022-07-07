@@ -82,10 +82,23 @@ for (const project of projects.projects) {
 			})
 		)
 	);
-	const loader = new GLTFLoader().setPath('models/');
+	project.speed = randInt(5, 20);
+	project.time = time;
+	time += randInt(10, 20) / 10;
+	planet.userData = project;
+	planet.name = `planet ${project.name}`;
+	planets.push(planet);
+	scene.add(planet);
+}
 
-	loader.load(
-		'model_sword.gltf',
+
+const loader = new GLTFLoader()
+
+function load_model(model, planet_index) {
+
+
+	loader.parse(
+		model, '',
 		function (gltf) {
 			console.log(gltf);
 
@@ -96,26 +109,20 @@ for (const project of projects.projects) {
 			});
 			})
 			gltf.scene.position.x = -4
-			gltf.scene.position.y = 2
+			gltf.scene.position.y = 4
 			gltf.scene.position.z = -5
 			gltf.scene.scale.x = 0.5
 			gltf.scene.scale.y = 0.5
 			gltf.scene.scale.z = 0.5
-			planets[1].add(gltf.scene);
+			planets[planet_index].add(gltf.scene);
 		},
 		undefined,
 		function (error) {
 			console.error(error);
 		}
 	);
-	project.speed = randInt(5, 20);
-	project.time = time;
-	time += randInt(10, 20) / 10;
-	planet.userData = project;
-	planet.name = `planet ${project.name}`;
-	planets.push(planet);
-	scene.add(planet);
 }
+
 
 for (var i = 0; i < 200; i++) {
 	var mesh = new THREE.Mesh(geometry, material);
@@ -174,7 +181,7 @@ const animate = () => {
 	});
 	particle.rotation.x += 0.0;
 	particle.rotation.y -= 0.002;
-	// sun.rotation.y += 0.005;
+	sun.rotation.y += 0.005;
 	const speeds = (distance) => {
 		if (distance > 150) return 10;
 		return 5;
@@ -251,8 +258,9 @@ function onDocumentMouseClick(event) {
 	}
 }
 
-export const createScene = (el, _window, document) => {
+export const createScene = (el, _window, document, path) => {
 	window = _window;
+	load_model(path, 1)
 	const controls = new OrbitControls(camera, el);
 	renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el, alpha: true });
 	resize(_window.innerWidth, _window.innerHeight);

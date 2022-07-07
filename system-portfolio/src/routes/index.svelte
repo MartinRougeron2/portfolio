@@ -7,9 +7,10 @@
 	let display = 'display: none';
 	let displayLoading = 'display: inline';
 	let loadingText = 'Reaching the planets';
+	import model from '$lib/3d/model_sword.js'
 
 	onMount(() => {
-		createScene(el, window, document);
+		createScene(el, window, document, model);
 	});
 	const load = setInterval(() => {
 		loadingText += '.';
