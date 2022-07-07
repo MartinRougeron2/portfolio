@@ -3,7 +3,7 @@ import { Vector3 } from 'three';
 
 import { OrbitControls } from './OrbitControls.js';
 import { randInt } from './MathUtils.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from './GLTFLoader.js';
 
 import projects from './projects.js';
 
