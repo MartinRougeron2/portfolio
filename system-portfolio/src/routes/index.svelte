@@ -53,8 +53,8 @@
 </script>
 
 <svelte:head>
-	<title>Portfolio</title>
-	<meta name="description" content="My works" />
+	<title>Martin Rougeron Portfolio</title>
+	<meta name="description" content="My different projects presented like a solar system" />
 </svelte:head>
 
 <section>
