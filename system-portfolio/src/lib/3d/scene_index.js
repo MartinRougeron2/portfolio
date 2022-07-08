@@ -21,7 +21,7 @@ class Circle {
 	}
 }
 
-const scene = new THREE.Scene();
+const scene_index = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
 let window;
 const dist = 1.3;
@@ -66,9 +66,9 @@ sun.add(
 planet2.scale.x = planet2.scale.y = planet2.scale.z = 1;
 skelet.visible = false;
 
-camera.position.z = 550;
+camera.position.z = 1050;
 camera.position.x = 50;
-camera.position.y = 550;
+camera.position.y = 1050;
 camera.lookAt(0, 0, 0);
 
 for (const project of projects.projects) {
@@ -88,7 +88,7 @@ for (const project of projects.projects) {
 	planet.userData = project;
 	planet.name = 'planet';
 	planets.push(planet);
-	scene.add(planet);
+	scene_index.add(planet);
 }
 
 const loader = new GLTFLoader();
@@ -98,7 +98,7 @@ function load_model(model, planet_index, scale, position) {
 		model,
 		'',
 		function (gltf) {
-			console.log(gltf);
+			if (planet_index < 0) console.log(gltf);
 
 			gltf.scene.children.forEach((mesh) => {
 				mesh.material = new THREE.MeshPhongMaterial({
@@ -126,11 +126,11 @@ function load_model(model, planet_index, scale, position) {
 	);
 }
 
-for (var i = 0; i < 200; i++) {
+for (var i = 0; i < 500; i++) {
 	var mesh = new THREE.Mesh(geometry, material);
 	mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
 	mesh.position.multiplyScalar(90 + Math.random() * 700);
-	mesh.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+	mesh.rotation.set(Math.random(), Math.random(), Math.random());
 	particle.add(mesh);
 }
 
@@ -148,25 +148,25 @@ lightsSide[1].position.set(0.75, 1, 0.5);
 lightsSide[2] = new THREE.DirectionalLight(0x8200c9, 0.6);
 lightsSide[2].position.set(-0.75, -1, 0.5);
 
-scene.add(sun);
-scene.add(new Circle(15 * dist).line);
-scene.add(new Circle(25 * dist).line);
-scene.add(new Circle(35 * dist).line);
-scene.add(particle);
-scene.add(lights[0]);
-scene.add(lights[1]);
-scene.add(lights[2]);
-scene.add(lightsSide[0]);
-scene.add(lightsSide[1]);
-scene.add(lightsSide[2]);
-scene.add(skelet);
+scene_index.add(sun);
+scene_index.add(new Circle(15 * dist).line);
+scene_index.add(new Circle(25 * dist).line);
+scene_index.add(new Circle(35 * dist).line);
+scene_index.add(particle);
+scene_index.add(lights[0]);
+scene_index.add(lights[1]);
+scene_index.add(lights[2]);
+scene_index.add(lightsSide[0]);
+scene_index.add(lightsSide[1]);
+scene_index.add(lightsSide[2]);
+scene_index.add(skelet);
 skelet.add(planet2);
 
 const animate = () => {
 	requestAnimationFrame(animate);
 	const time = Date.now() * 0.0005;
 	planets.forEach((planet) => {
-		planet.rotation.y += time * 0.00000000002
+		planet.rotation.y += time * 0.00000000001;
 		planet.position.x =
 			-Math.cos(planet.userData.time) * (10 * dist * (0.5 + planet.userData.year));
 		planet.position.z =
@@ -230,7 +230,7 @@ const animate = () => {
 		skelet.visible = false;
 	}
 
-	renderer.render(scene, camera);
+	renderer.render(scene_index, camera);
 };
 
 const resize = (width, height) => {
@@ -286,4 +286,5 @@ export const createScene = (el, _window, document, models) => {
 	// when the mouse moves, call the given function
 	_window.addEventListener('mousemove', onDocumentMouseMove, false);
 	_window.addEventListener('mousedown', onDocumentMouseClick, false);
+	return true;
 };

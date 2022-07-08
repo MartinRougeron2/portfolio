@@ -41,18 +41,18 @@ let projects = [
 	new Project(
 		'BomberMan',
 		'Bomberman is one of the most fun game, but you need to be on the same computer to play (at its release) ... So we create a multi player game and playable from 1 to 4 by network. ',
-		4,
+		5,
 		2,
 		3
 	),
 	new Project(
 		'NanotekSpice',
 		'A C++ project to simulate a hardware piece working, you give a model, some input and simulate the output !',
-		2,
+		4,
 		2,
 		4
 	),
-	new Project('Plazza', 'Your own pizzeria with a multithreading kitchen', 2, 2, 5)
+	new Project('Plazza', 'Your own pizzeria with a multithreading kitchen', 3, 2, 5)
 ];
 
 let sun = new Project(

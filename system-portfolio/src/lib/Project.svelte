@@ -24,7 +24,7 @@
 </script>
 
 <section>
-	<div class="project p-4">
+	<div class="project p-4 md:bot sm:bot xs:bot">
 		{#if projectSelected}
 			<div class="card">
 				<div class="title p-2 flex justify-between">
@@ -61,7 +61,6 @@
 
 <style>
 	.project {
-		top: 25vh;
 		right: 10px;
 		position: absolute;
 		width: min(400px, calc(95vw - 10px));
@@ -73,6 +72,10 @@
 		transition: color 0.2s linear;
 		border: 1px solid white;
 		border-radius: 5px;
+		top: 25vh;
+	}
+	.bot {
+		bottom: 1vh;
 	}
 	.title {
 		font-weight: 900;
