@@ -1,8 +1,8 @@
 <header>
 	<div class="flex justify-between p-5" style="width: 100%">
-		<div id="name">
+		<h1 id="name">
 			<a href="/" class=""> Martin Rougeron </a>
-		</div>
+		</h1>
 		<div id="contact-container" class="flex flex-row-reverse pr-3">
 			<div id="contact">
 				<a href="/contact">Contact</a>
