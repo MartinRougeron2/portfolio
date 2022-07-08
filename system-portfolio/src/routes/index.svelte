@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { createScene } from '../lib/3d/scene.js';
+	import { createScene } from '../lib/3d/scene_index.js';
 	import Project from '../lib/Project.svelte';
 	let el;
 	let animation = true;
@@ -26,30 +26,32 @@
 	}
 
 	const models = [
-		new ProjectDecoration(bomb, { x: 0, y: 6, z: 0 }, 7, 4),
+		new ProjectDecoration(bomb, { x: 0, y: 9, z: 0 }, 15, 4),
 		new ProjectDecoration(sword, { x: -4, y: 6.5, z: -4 }, 0.5, 1),
 		new ProjectDecoration(web, { x: 0, y: 7, z: 0 }, 1, 0),
 		new ProjectDecoration(phone, { x: 0, y: 6, z: 0 }, 1, 2),
 		new ProjectDecoration(chart, { x: 0, y: 6, z: 0 }, 10, 3),
 		new ProjectDecoration(chip, { x: -3, y: -3, z: 22 }, 0.2, 5),
 		//new ProjectDecoration(pizza, { x: 0, y: 6, z: 0 }, 1, 6),
-		new ProjectDecoration(cap, { x: 0, y: 8.5, z: 0 }, 2, -1)
+		new ProjectDecoration(cap, { x: 0, y: 10, z: 0 }, 2, -1)
 	];
 
 	onMount(() => {
 		createScene(el, window, document, models);
+		console.log('in');
 	});
 	const load = setInterval(() => {
 		loadingText += '.';
-	}, 150);
+	}, 50);
 	setTimeout(() => {
 		animation = false;
-	}, 4500);
+		console.log(el);
+	}, 3000);
 	setTimeout(() => {
 		displayLoading = display;
 		display = 'display: block';
 		clearInterval(load);
-	}, 600);
+	}, 60);
 </script>
 
 <svelte:head>
@@ -65,9 +67,9 @@
 		<div style={display}>
 			<canvas bind:this={el} />
 		</div>
-		{#if !animation}
+		<div style={animation ? 'display: none' : ''}>
 			<Project />
-		{/if}
+		</div>
 	</div>
 </section>
 
