@@ -2,6 +2,8 @@ import { OrbitControls } from './OrbitControls.js';
 import { randInt } from './MathUtils.js';
 import { GLTFLoader } from './GLTFLoader.js';
 
+import font from "./models/font.json"
+
 let scene,
 	camera,
 	fieldOfView,
@@ -22,8 +24,13 @@ let scene,
 	mouse,
 	raycaster,
 	selected,
-	intersect
-;
+	intersect,
+	text,
+	textGeo;
+
+
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
 
 import * as THREE from 'three';
 
@@ -58,7 +65,6 @@ const createScene = (el, window) => {
 
 	raycaster = new THREE.Raycaster();
 
-
 	window.addEventListener('resize', handleWindowResize, false);
 
 	let loader = new GLTFLoader();
@@ -75,9 +81,12 @@ const createScene = (el, window) => {
 		emissive: 0xffffff
 	});
 
-	geometry_planets = new THREE.OctahedronGeometry(50, 3);
 
-	particules = []
+	const loaded_font = (new FontLoader()).parse((font))
+
+	geometry_planets = new THREE.OctahedronGeometry(50, 5);
+
+	particules = [];
 	particules.push(new THREE.Object3D());
 	particules.push(new THREE.Object3D());
 	particules.push(new THREE.Object3D());
@@ -85,47 +94,86 @@ const createScene = (el, window) => {
 	particules[1].position.y = 500;
 	particules[0].position.y = 1000;
 	particules[2].position.y = 1500;
-	particules.forEach(obj => {
-			for (var i = 0; i < 500; i++) {
-				var mesh = new THREE.Mesh(geometry_stars, material_stars);
-				mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-				mesh.position.multiplyScalar(500);
-				mesh.rotation.set(Math.random(), Math.random(), Math.random());
-				obj.add(mesh);
-			}
-			scene.add(obj)
-		})
+	particules.forEach((obj) => {
+		for (var i = 0; i < 500; i++) {
+			var mesh = new THREE.Mesh(geometry_stars, material_stars);
+			mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+			mesh.position.multiplyScalar(500);
+			mesh.rotation.set(Math.random(), Math.random(), Math.random());
+			obj.add(mesh);
+		}
+		scene.add(obj);
+	});
 
-	planets = []
+	planets = [];
 	planets_metadata = [
-		{x: -340, y: 100, z: 40, finished: false, material: new THREE.MeshStandardMaterial({
-		color: 0x00ffff,
-		flatShading: true
-	}), link: "https://www.linkedin.com/signup/public-profile-join?vieweeVanityName=martin-rougeron-495b86171&trk=public_profile-settings_top-card-primary-button-join-to-connec"},
+		{
+			x: -340,
+			y: 100,
+			z: 40,
+			finished: false,
+			material: new THREE.MeshStandardMaterial({
+				color: 0x00ffff,
+				flatShading: true
+			}),
+			name: 'Linkedin',
+			link: 'https://www.linkedin.com/signup/public-profile-join?vieweeVanityName=martin-rougeron-495b86171&trk=public_profile-settings_top-card-primary-button-join-to-connect'
+		},
 
-		{x: 300, y: 0, z: 40, finished: false, material: new THREE.MeshStandardMaterial({
-		color: 0x262626,
-		flatShading: true
-	}), link: "https://github.com/MartinRougeron2/"},
+		{
+			x: 300,
+			y: 0,
+			z: 40,
+			finished: false,
+			material: new THREE.MeshStandardMaterial({
+				color: 0x262626,
+				flatShading: true
+			}),
+			name: 'Github',
+			link: 'https://github.com/MartinRougeron2/'
+		},
 
-		{x: -250, y: -150, z: 40, finished: false, material: new THREE.MeshStandardMaterial({
-		color: 0x835ad1,
-		flatShading: true
-	}), link: "https://discord.gg/Zu7aJUsdTK"},
-
-	]
+		{
+			x: -250,
+			y: -150,
+			z: 40,
+			finished: false,
+			material: new THREE.MeshStandardMaterial({
+				color: 0x835ad1,
+				flatShading: true
+			}),
+			name: 'Discord',
+			link: 'https://discord.gg/Zu7aJUsdTK'
+		}
+	];
 
 	for (let i = 0; i < 3; i += 1) {
-		planets.push(
-			new THREE.Object3D()
-		);
+		planets.push(new THREE.Object3D());
 		var mesh = new THREE.Mesh(geometry_planets, planets_metadata[i].material);
-		planets[i].add(mesh)
-		planets[i].position.x = planets_metadata[i].x
-		planets[i].position.y = planets_metadata[i].y + 500
-		planets[i].position.z = planets_metadata[i].z
-		planets[i].name = planets_metadata[i].link
-		scene.add(planets[i])
+		planets[i].add(mesh);
+		planets[i].position.x = planets_metadata[i].x;
+		planets[i].position.y = planets_metadata[i].y + 500;
+		planets[i].position.z = planets_metadata[i].z;
+		planets[i].name = planets_metadata[i].link;
+		text = planets_metadata[i].name;
+		let textGeoTmp = new TextGeometry(text, {
+		font: loaded_font,
+		size: 15,
+		height: 30,
+		curveSegments: 4,
+		bevelThickness: 2,
+		bevelSize: 1.5,
+		bevelEnabled: true
+	})
+		textGeoTmp.computeBoundingBox()
+		textGeoTmp.center()
+		textGeoTmp.translate(0, -80, 0)
+		let meshTmp = new THREE.Mesh(textGeoTmp, new THREE.MeshPhongMaterial({ color: 0xffffff, flatShading: true }));
+		meshTmp.quaternion.copy(camera.quaternion);
+		planets[i].add(
+			meshTmp
+		);
+		scene.add(planets[i]);
 	}
 };
 
@@ -157,35 +205,33 @@ const loop = () => {
 
 	renderer.render(scene, camera);
 
-	const delta = targetRocketPosition * Math.sin(Math.PI * 2 * t);
 	if (rocket) {
-		if (rocket.position.y < delta && launch) {
-			rocket.position.y += 5;
+		if (rocket.position.y < 0 && launch) {
+			rocket.position.y += 10;
 		} else {
 			launch = false;
-			rocket.position.y = delta;
+			rocket.position.y = 0;
 		}
 		rocket.rotation.y += 0.05;
 	}
 
-	particules.forEach(obj => {
+	particules.forEach((obj) => {
 		obj.position.y -= 6;
-		if (obj.position.y < -200)
-			obj.position.y = 1000
-	})
+		if (obj.position.y < -200) obj.position.y = 1000;
+	});
 
 	planets.forEach((planet, index) => {
-		if (planet.position.y > (-delta + planets_metadata[index].y) && !planets_metadata[index].finished) {
-			planet.position.y -= 5;
+		if (planet.position.y > planets_metadata[index].y && !planets_metadata[index].finished) {
+			planet.position.y -= 10;
 		} else {
 			planets_metadata[index].finished = true;
-			planet.position.y = -delta * 0.7 + planets_metadata[index].y
+			planet.position.y = planets_metadata[index].y;
 		}
-		planet.rotation.y -= 0.04
-	})
+		planet.rotation.y -= 0.01;
+		planet.children[1].rotation.y += 0.01;
+	});
 	raycaster.setFromCamera(mouse, camera);
 	var intersects = raycaster.intersectObjects(planets, true);
-
 
 	if (intersects.length > 0) {
 		document.body.style.cursor = 'pointer';
@@ -211,13 +257,12 @@ function onDocumentMouseClick(event) {
 	var intersects = raycaster.intersectObjects(planets, true);
 
 	if (intersects.length > 0) {
-		const url = intersects[0].object.parent.name
+		const url = intersects[0].object.parent.name;
 		window.open(url, '_blank').focus();
 	} else {
 		selected = null;
 	}
 }
-
 
 export function main(el, window) {
 	createScene(el, window);
