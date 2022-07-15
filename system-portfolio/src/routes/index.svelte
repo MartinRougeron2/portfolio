@@ -46,7 +46,7 @@
 	setTimeout(() => {
 		animation = false;
 		console.log(el);
-	}, 3000);
+	}, 4000);
 	setTimeout(() => {
 		displayLoading = display;
 		display = 'display: block';
