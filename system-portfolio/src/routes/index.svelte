@@ -2,11 +2,6 @@
 	import { onMount } from 'svelte';
 	import { createScene } from '../lib/3d/scene_index.js';
 	import Project from '../lib/Project.svelte';
-	let el;
-	let animation = true;
-	let display = 'display: none';
-	let displayLoading = 'display: inline';
-	let loadingText = 'Reaching the planets';
 	import bomb from '$lib/3d/models/bomb.js';
 	import cap from '$lib/3d/models/cap.js';
 	import chart from '$lib/3d/models/chart.js';
@@ -15,6 +10,14 @@
 	//import pizza from '$lib/3d/models/pizza.js';
 	import sword from '$lib/3d/models/sword.js';
 	import web from '$lib/3d/models/web.js';
+	import * as Sentry from '@sentry/browser';
+	import { BrowserTracing } from '@sentry/tracing';
+
+	let el;
+	let animation = true;
+	let display = 'display: none';
+	let displayLoading = 'display: inline';
+	let loadingText = 'Reaching the planets';
 
 	class ProjectDecoration {
 		constructor(model, position, scale, project_index) {
@@ -37,8 +40,24 @@
 	];
 
 	onMount(() => {
+		Sentry.init({
+			dsn: 'https://dd9ebc11dc764361a9445b261d535b23@o1322275.ingest.sentry.io/6579376',
+			integrations: [new BrowserTracing()],
+
+			// Set tracesSampleRate to 1.0 to capture 100%
+			// of transactions for performance monitoring.
+			// We recommend adjusting this value in production
+			tracesSampleRate: 1.0,
+			maxBreadcrumbs: 1000,
+			beforeBreadcrumb(breadcrumb, hint) {
+				if (breadcrumb.category === 'fetch') {
+					return null;
+				}
+				console.log(breadcrumb);
+				return breadcrumb;
+			}
+		});
 		createScene(el, window, document, models);
-		console.log('in');
 	});
 	const load = setInterval(() => {
 		loadingText += '.';

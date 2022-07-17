@@ -2,19 +2,36 @@
 	import { main, destroy } from '../lib/3d/scene_contact.js';
 	import { onDestroy, onMount } from 'svelte';
 	import linkedin from '../lib/3d/models/linkedin.js';
-	import github from "../lib/3d/models/github.js";
-	import discord from "../lib/3d/models/discord.js";
+	import github from '../lib/3d/models/github.js';
+	import discord from '../lib/3d/models/discord.js';
+	import * as Sentry from '@sentry/browser';
+	import { BrowserTracing } from '@sentry/tracing';
 
 	let el;
 
 	onMount(() => {
-		main(el, window, { linkedin: linkedin, github: github, discord: discord });
-		console.log('in');
+		main(el, window, { Linkedin: linkedin, Github: github, Discord: discord });
+		Sentry.init({
+			dsn: 'https://dd9ebc11dc764361a9445b261d535b23@o1322275.ingest.sentry.io/6579376',
+			integrations: [new BrowserTracing()],
+
+			// Set tracesSampleRate to 1.0 to capture 100%
+			// of transactions for performance monitoring.
+			// We recommend adjusting this value in production
+			tracesSampleRate: 1.0,
+			maxBreadcrumbs: 1000,
+			beforeBreadcrumb(breadcrumb, hint) {
+				if (breadcrumb.category === 'fetch') {
+					return null;
+				}
+				console.log(breadcrumb);
+				return breadcrumb;
+			}
+		});
 	});
 
 	onDestroy(() => {
 		destroy();
-		console.log('out');
 	});
 </script>
 

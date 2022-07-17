@@ -98,8 +98,6 @@ function load_model(model, planet_index, scale, position) {
 		model,
 		'',
 		function (gltf) {
-			if (planet_index < 0) console.log(gltf);
-
 			gltf.scene.children.forEach((mesh) => {
 				mesh.material = new THREE.MeshPhongMaterial({
 					color: 0xe0e0e0,
@@ -115,7 +113,6 @@ function load_model(model, planet_index, scale, position) {
 			gltf.scene.name = 'decoration';
 			if (planet_index >= 0) planets[planet_index].add(gltf.scene);
 			else {
-				console.log(position);
 				sun.add(gltf.scene);
 			}
 		},
@@ -252,7 +249,6 @@ function onDocumentMouseClick(event) {
 	var intersects = raycaster.intersectObjects([...planets, sun], true);
 
 	if (intersects.length > 0) {
-		console.log(intersects);
 		selected = intersects[0].object.parent;
 		while (
 			selected.name !== 'decoration' &&

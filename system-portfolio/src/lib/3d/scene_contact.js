@@ -114,7 +114,7 @@ const createScene = (el, window) => {
 				color: 0x00ffff,
 				flatShading: true
 			}),
-			name: 'linkedin',
+			name: 'Linkedin',
 			rotation: 3.14,
 			scale: 10,
 			link: 'https://www.linkedin.com/signup/public-profile-join?vieweeVanityName=martin-rougeron-495b86171&trk=public_profile-settings_top-card-primary-button-join-to-connect'
@@ -129,9 +129,9 @@ const createScene = (el, window) => {
 				color: 0x262626,
 				flatShading: true
 			}),
-			name: 'github',
+			name: 'Github',
 			rotation: 0,
-			rotationY: -.5,
+			rotationY: -0.5,
 			scale: 2,
 			link: 'https://github.com/MartinRougeron2/'
 		},
@@ -145,9 +145,9 @@ const createScene = (el, window) => {
 				color: 0x835ad1,
 				flatShading: true
 			}),
-			name: 'discord',
+			name: 'Discord',
 			rotation: 3.14,
-			scale: .21,
+			scale: 0.21,
 			link: 'https://discord.gg/Zu7aJUsdTK'
 		}
 	];
@@ -155,7 +155,6 @@ const createScene = (el, window) => {
 	textGeo = [];
 	for (let i = 0; i < 3; i += 1) {
 		planets.push(new THREE.Object3D());
-		console.log(models[planets_metadata[i].name]);
 		loader.parse(models[planets_metadata[i].name], '', (gltf) => {
 			gltf.scene.children.forEach((mesh) => {
 				mesh.material = new THREE.MeshPhongMaterial({
@@ -165,10 +164,13 @@ const createScene = (el, window) => {
 			});
 			gltf.scene.name = '';
 			const logo = gltf.scene;
-			logo.scale.set(planets_metadata[i].scale, planets_metadata[i].scale, planets_metadata[i].scale);
+			logo.scale.set(
+				planets_metadata[i].scale,
+				planets_metadata[i].scale,
+				planets_metadata[i].scale
+			);
 			logo.rotation.y = planets_metadata[i].rotation;
-			if (planets_metadata[i].rotationY)
-			logo.rotation.x = planets_metadata[i].rotationY;
+			if (planets_metadata[i].rotationY) logo.rotation.x = planets_metadata[i].rotationY;
 			planets[i].add(logo);
 		});
 		planets[i].position.x = planets_metadata[i].x;
@@ -278,9 +280,12 @@ function onDocumentMouseClick(event) {
 	var intersects = raycaster.intersectObjects(planets, true);
 
 	if (intersects.length > 0) {
-		while (intersects[0].object.parent.name === '' || (intersects[0].object.parent.name !== '' && intersects[0].object.parent.name[0] !== 'h'))
-			intersects[0].object = intersects[0].object.parent
-		const url = intersects[0].object.parent.name
+		while (
+			intersects[0].object.parent.name === '' ||
+			(intersects[0].object.parent.name !== '' && intersects[0].object.parent.name[0] !== 'h')
+		)
+			intersects[0].object = intersects[0].object.parent;
+		const url = intersects[0].object.parent.name;
 		window.open(url, '_blank').focus();
 	}
 }
