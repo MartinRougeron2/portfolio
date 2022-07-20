@@ -1,6 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
-	import { createScene } from '../lib/3d/scene_index.js';
+	import { onDestroy, onMount } from "svelte";
+	import { createScene, destroy } from '../lib/3d/scene_index.js';
 	import Project from '../lib/Project.svelte';
 	import bomb from '$lib/3d/models/bomb.js';
 	import cap from '$lib/3d/models/cap.js';
@@ -58,18 +58,24 @@
 		});
 		createScene(el, window, document, models);
 	});
+
 	const load = setInterval(() => {
 		loadingText += '.';
 	}, 50);
+
 	setTimeout(() => {
 		animation = false;
-		console.log(el);
 	}, 4000);
+
 	setTimeout(() => {
 		displayLoading = display;
 		display = 'display: block';
 		clearInterval(load);
 	}, 60);
+
+	onDestroy(() => {
+		destroy()
+	});
 </script>
 
 <svelte:head>
@@ -95,13 +101,9 @@
 	div {
 		width: 100vw;
 		height: 100vh;
-		background: #11e8bb; /* Old browsers */
-		background: -moz-linear-gradient(top, #11e8bb 0%, #8200c9 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(
-			top,
-			#11e8bb 0%,
-			#8200c9 100%
-		); /* Chrome10-25,Safari5.1-6 */
+		background: #11e8bb;
+		background: -moz-linear-gradient(top, #11e8bb 0%, #8200c9 100%);
+		background: -webkit-linear-gradient(top, #11e8bb 0%, #8200c9 100%);
 		background: radial-gradient(circle, rgba(238, 174, 202, 0.52) 0%, rgba(148, 187, 233, 1) 100%);
 		overflow: hidden;
 	}

@@ -21,77 +21,37 @@ class Circle {
 	}
 }
 
-const scene_index = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
 let window;
-const dist = 1.3;
+let loaded = false;
+let scene_index = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
+let dist = 1.3;
 let mouse = new THREE.Vector2(3, 3);
 let animation = true;
 let intersect;
-var selected;
-const sun = new THREE.Object3D();
+let selected;
+let sun = new THREE.Object3D();
 let renderer;
-var planets = [];
-var time = 0;
+let planets = [];
+let time = 0;
 let particle = new THREE.Object3D();
-const geometry = new THREE.TetrahedronGeometry(2, 0);
-const material = new THREE.MeshPhongMaterial({
+let geometry = new THREE.TetrahedronGeometry(2, 0);
+let material = new THREE.MeshPhongMaterial({
 	color: 0xffffff,
 	flatShading: true
 });
-var lights = [];
-var lightsSide = [];
+let lights = [];
+let lightsSide = [];
 let raycaster = new THREE.Raycaster();
 let skelet = new THREE.Object3D();
-var geom2 = new THREE.IcosahedronGeometry(1, 1);
-var mat2 = new THREE.MeshPhongMaterial({
+let geom2 = new THREE.IcosahedronGeometry(1, 1);
+let mat2 = new THREE.MeshPhongMaterial({
 	color: 0xffffff,
 	wireframe: true,
 	side: THREE.DoubleSide
 });
-var planet2 = new THREE.Mesh(geom2, mat2);
-
-sun.name = 'sun';
-sun.userData = projects.sun;
-sun.add(
-	new THREE.Mesh(
-		new THREE.IcosahedronGeometry(8, 3),
-		new THREE.MeshPhongMaterial({
-			color: 0xe0e0e0,
-			flatShading: true
-		})
-	)
-);
-
-planet2.scale.x = planet2.scale.y = planet2.scale.z = 1;
-skelet.visible = false;
-
-camera.position.z = 1050;
-camera.position.x = 50;
-camera.position.y = 1050;
-camera.lookAt(0, 0, 0);
-
-for (const project of projects.projects) {
-	const planet = new THREE.Object3D();
-	planet.add(
-		new THREE.Mesh(
-			new THREE.IcosahedronGeometry(project.size, project.size > 4 ? 1 : 0),
-			new THREE.MeshPhongMaterial({
-				color: 0xe0e0e0,
-				flatShading: true
-			})
-		)
-	);
-	project.speed = randInt(5, 20);
-	project.time = time;
-	time += randInt(10, 20) / 10;
-	planet.userData = project;
-	planet.name = 'planet';
-	planets.push(planet);
-	scene_index.add(planet);
-}
-
-const loader = new GLTFLoader();
+let planet2 = new THREE.Mesh(geom2, mat2);
+let loader = new GLTFLoader();
 
 function load_model(model, planet_index, scale, position) {
 	loader.parse(
@@ -123,42 +83,114 @@ function load_model(model, planet_index, scale, position) {
 	);
 }
 
-for (var i = 0; i < 1000; i++) {
-	var mesh = new THREE.Mesh(geometry, material);
-	mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-	mesh.position.multiplyScalar(90 + Math.random() * 700);
-	mesh.rotation.set(Math.random(), Math.random(), Math.random());
-	particle.add(mesh);
+function init() {
+	loaded = false;
+	scene_index = new THREE.Scene();
+	camera = new THREE.PerspectiveCamera(75, 2, 1, 20000);
+	dist = 1.3;
+	mouse = new THREE.Vector2(3, 3);
+	animation = true;
+	intersect;
+	selected;
+	sun = new THREE.Object3D();
+	renderer;
+	planets = [];
+	time = 0;
+	particle = new THREE.Object3D();
+	geometry = new THREE.TetrahedronGeometry(2, 0);
+	material = new THREE.MeshPhongMaterial({
+		color: 0xffffff,
+		flatShading: true
+	});
+	lights = [];
+	lightsSide = [];
+	raycaster = new THREE.Raycaster();
+	skelet = new THREE.Object3D();
+	geom2 = new THREE.IcosahedronGeometry(1, 1);
+	mat2 = new THREE.MeshPhongMaterial({
+		color: 0xffffff,
+		wireframe: true,
+		side: THREE.DoubleSide
+	});
+	planet2 = new THREE.Mesh(geom2, mat2);
+	loader = new GLTFLoader();
+
+	sun.name = 'sun';
+	sun.userData = projects.sun;
+	sun.add(
+		new THREE.Mesh(
+			new THREE.IcosahedronGeometry(8, 3),
+			new THREE.MeshPhongMaterial({
+				color: 0xe0e0e0,
+				flatShading: true
+			})
+		)
+	);
+
+	planet2.scale.x = planet2.scale.y = planet2.scale.z = 1;
+	skelet.visible = false;
+
+	camera.position.z = 1050;
+	camera.position.x = 50;
+	camera.position.y = 1050;
+	camera.lookAt(0, 0, 0);
+
+	for (const project of projects.projects) {
+		const planet = new THREE.Object3D();
+		planet.add(
+			new THREE.Mesh(
+				new THREE.IcosahedronGeometry(project.size, project.size > 4 ? 1 : 0),
+				new THREE.MeshPhongMaterial({
+					color: 0xe0e0e0,
+					flatShading: true
+				})
+			)
+		);
+		project.speed = randInt(5, 20);
+		project.time = time;
+		time += randInt(10, 20) / 10;
+		planet.userData = project;
+		planet.name = 'planet';
+		planets.push(planet);
+		scene_index.add(planet);
+	}
+
+	for (let i = 0; i < 1000; i++) {
+		let mesh = new THREE.Mesh(geometry, material);
+		mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+		mesh.position.multiplyScalar(90 + Math.random() * 700);
+		mesh.rotation.set(Math.random(), Math.random(), Math.random());
+		particle.add(mesh);
+	}
+
+	lights[0] = new THREE.DirectionalLight(0xffffff, 0.6);
+	lights[0].position.set(1, 0, 0);
+	lights[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
+	lights[1].position.set(0.75, 1, 0.5);
+	lights[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
+	lights[2].position.set(-0.75, -1, 0.5);
+
+	lightsSide[0] = new THREE.DirectionalLight(0xffffff, 0.6);
+	lightsSide[0].position.set(1, 0, 0);
+	lightsSide[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
+	lightsSide[1].position.set(0.75, 1, 0.5);
+	lightsSide[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
+	lightsSide[2].position.set(-0.75, -1, 0.5);
+
+	scene_index.add(sun);
+	scene_index.add(new Circle(15 * dist).line);
+	scene_index.add(new Circle(25 * dist).line);
+	scene_index.add(new Circle(35 * dist).line);
+	scene_index.add(particle);
+	scene_index.add(lights[0]);
+	scene_index.add(lights[1]);
+	scene_index.add(lights[2]);
+	scene_index.add(lightsSide[0]);
+	scene_index.add(lightsSide[1]);
+	scene_index.add(lightsSide[2]);
+	scene_index.add(skelet);
+	skelet.add(planet2);
 }
-
-lights[0] = new THREE.DirectionalLight(0xffffff, 0.6);
-lights[0].position.set(1, 0, 0);
-lights[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
-lights[1].position.set(0.75, 1, 0.5);
-lights[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
-lights[2].position.set(-0.75, -1, 0.5);
-
-lightsSide[0] = new THREE.DirectionalLight(0xffffff, 0.6);
-lightsSide[0].position.set(1, 0, 0);
-lightsSide[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
-lightsSide[1].position.set(0.75, 1, 0.5);
-lightsSide[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
-lightsSide[2].position.set(-0.75, -1, 0.5);
-
-scene_index.add(sun);
-scene_index.add(new Circle(15 * dist).line);
-scene_index.add(new Circle(25 * dist).line);
-scene_index.add(new Circle(35 * dist).line);
-scene_index.add(particle);
-scene_index.add(lights[0]);
-scene_index.add(lights[1]);
-scene_index.add(lights[2]);
-scene_index.add(lightsSide[0]);
-scene_index.add(lightsSide[1]);
-scene_index.add(lightsSide[2]);
-scene_index.add(skelet);
-skelet.add(planet2);
-
 const animate = () => {
 	requestAnimationFrame(animate);
 	const time = Date.now() * 0.0005;
@@ -191,19 +223,21 @@ const animate = () => {
 		camera.position.z -= speeds(camera.position.z);
 		camera.lookAt(0, 0, 0);
 		if (window.screen.width > 1000) {
-			if (camera.position.y <= 50) {
+			if (camera.position.y <= 50 || loaded) {
 				animation = false;
+				camera.position.y = 50;
 			}
 		} else {
-			if (camera.position.y <= 100) {
+			if (camera.position.y <= 100 || loaded) {
 				animation = false;
+				camera.position.y = 100;
 			}
 			camera.lookAt(10, 0, 20);
 		}
 	}
 
 	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects([...planets, sun], true);
+	let intersects = raycaster.intersectObjects([...planets, sun], true);
 
 	if (intersect) {
 		// reset
@@ -211,7 +245,7 @@ const animate = () => {
 	}
 	if (intersects.length > 0 && !animation) {
 		document.body.style.cursor = 'pointer';
-		var object = intersects[0].object;
+		let object = intersects[0].object;
 		intersect = object;
 		// reset
 		object.material.color.set(0xffffff);
@@ -237,9 +271,11 @@ const animate = () => {
 	renderer.render(scene_index, camera);
 };
 
-const resize = (width, height) => {
-	renderer.setSize(width, height);
-	camera.aspect = width / height;
+const resize = () => {
+	const HEIGHT = window.innerHeight;
+	const WIDTH = window.innerWidth;
+	renderer.setSize(WIDTH, HEIGHT);
+	camera.aspect = WIDTH / HEIGHT;
 	camera.updateProjectionMatrix();
 };
 
@@ -253,7 +289,7 @@ function onDocumentMouseClick(event) {
 	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects([...planets, sun], true);
+	let intersects = raycaster.intersectObjects([...planets, sun], true);
 
 	if (intersects.length > 0) {
 		selected = intersects[0].object.parent;
@@ -275,7 +311,9 @@ function onDocumentMouseClick(event) {
 }
 
 export const createScene = (el, _window, document, models) => {
+	loaded = true
 	window = _window;
+	init();
 	models.forEach((model) => {
 		load_model(model.model, model.project_index, model.scale, model.position);
 	});
@@ -284,10 +322,18 @@ export const createScene = (el, _window, document, models) => {
 	resize(_window.innerWidth, _window.innerHeight);
 	animate();
 	controls.update();
-	_window.addEventListener('resize', resize(_window.innerWidth, _window.innerHeight));
 
 	// when the mouse moves, call the given function
 	_window.addEventListener('mousemove', onDocumentMouseMove, false);
 	_window.addEventListener('mousedown', onDocumentMouseClick, false);
+	_window.addEventListener('resize', resize, false);
 	return true;
 };
+
+export function destroy() {
+	if (scene_index)
+		while (scene_index.children.length > 0) {
+			scene_index.remove(scene_index.children[0]);
+		}
+	animation = true;
+}

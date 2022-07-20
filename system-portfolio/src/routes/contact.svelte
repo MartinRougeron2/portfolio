@@ -14,17 +14,12 @@
 		Sentry.init({
 			dsn: 'https://dd9ebc11dc764361a9445b261d535b23@o1322275.ingest.sentry.io/6579376',
 			integrations: [new BrowserTracing()],
-
-			// Set tracesSampleRate to 1.0 to capture 100%
-			// of transactions for performance monitoring.
-			// We recommend adjusting this value in production
 			tracesSampleRate: 1.0,
 			maxBreadcrumbs: 1000,
 			beforeBreadcrumb(breadcrumb, hint) {
 				if (breadcrumb.category === 'fetch') {
 					return null;
 				}
-				console.log(breadcrumb);
 				return breadcrumb;
 			}
 		});
@@ -57,13 +52,9 @@
 	section {
 		width: 100vw;
 		height: 100vh;
-		background: #11e8bb; /* Old browsers */
-		background: -moz-linear-gradient(top, #11e8bb 0%, #8200c9 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(
-			top,
-			#11e8bb 0%,
-			#8200c9 100%
-		); /* Chrome10-25,Safari5.1-6 */
+		background: #11e8bb;
+		background: -moz-linear-gradient(top, #11e8bb 0%, #8200c9 100%);
+		background: -webkit-linear-gradient(top, #11e8bb 0%, #8200c9 100%);
 		background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
 		overflow: hidden;
 	}

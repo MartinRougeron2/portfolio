@@ -89,8 +89,6 @@
 	let lastevt = 0;
 
 	onMount(() => {
-		console.log(projects);
-
 		window.addEventListener('scroll', (evt) => {
 			if (!(lastevt + 200 < evt.timeStamp) || Math.abs(window.scrollY - oldScroll) < 50) return;
 			lastevt = evt.timeStamp;
@@ -99,7 +97,6 @@
 			} else {
 				index += index < projects.length - 1;
 			}
-			console.log(projects[index].id);
 			oldScroll = window.scrollY;
 			evt.stopPropagation();
 		});
@@ -117,9 +114,10 @@
 <section>
 	<div id="all">
 		{#each projects as project, index}
+			<div id="{project.id}" class="id"></div>
 			<div class="flex flex-row">
 				<div class="timeline-full">
-					<div id={project.id}>
+					<div>
 						<svg height="42" width="80">
 							<circle cx="45" cy="21" r="20" stroke="white" stroke-width="3" fill="transparent" />
 						</svg>
@@ -155,5 +153,9 @@
 
 	.timeline-full {
 		margin-top: 100px;
+	}
+
+	.id {
+		transform: translateY(-50px);
 	}
 </style>

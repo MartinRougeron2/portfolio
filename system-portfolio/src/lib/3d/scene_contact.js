@@ -1,5 +1,3 @@
-import { OrbitControls } from './OrbitControls.js';
-import { randInt } from './MathUtils.js';
 import { GLTFLoader } from './GLTFLoader.js';
 
 import font from './models/font.json';
@@ -17,12 +15,12 @@ let scene,
 	launch,
 	geometry_stars,
 	material_stars,
-	particules,
+	particles,
 	planets,
 	geometry_planets,
 	planets_metadata,
 	mouse,
-	raycaster,
+	ray_caster,
 	intersect,
 	text,
 	models,
@@ -62,7 +60,7 @@ const createScene = (el, window) => {
 
 	mouse = new THREE.Vector2();
 
-	raycaster = new THREE.Raycaster();
+	ray_caster = new THREE.Raycaster();
 
 	window.addEventListener('resize', handleWindowResize, false);
 
@@ -84,17 +82,17 @@ const createScene = (el, window) => {
 
 	geometry_planets = new THREE.OctahedronGeometry(50, 5);
 
-	particules = [];
-	particules.push(new THREE.Object3D());
-	particules.push(new THREE.Object3D());
-	particules.push(new THREE.Object3D());
+	particles = [];
+	particles.push(new THREE.Object3D());
+	particles.push(new THREE.Object3D());
+	particles.push(new THREE.Object3D());
 
-	particules[1].position.y = 500;
-	particules[0].position.y = 1000;
-	particules[2].position.y = 1500;
-	particules.forEach((obj) => {
-		for (var i = 0; i < 500; i++) {
-			var mesh = new THREE.Mesh(geometry_stars, material_stars);
+	particles[1].position.y = 500;
+	particles[0].position.y = 1000;
+	particles[2].position.y = 1500;
+	particles.forEach((obj) => {
+		for (let i = 0; i < 500; i++) {
+			let mesh = new THREE.Mesh(geometry_stars, material_stars);
 			mesh.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
 			mesh.position.multiplyScalar(500);
 			mesh.rotation.set(Math.random(), Math.random(), Math.random());
@@ -222,12 +220,7 @@ const createLights = () => {
 	scene.add(ambientLight, directionalLight, pointLight);
 };
 
-const targetRocketPosition = 40;
-const animationDuration = 2000;
-
 const loop = () => {
-	const t = (Date.now() % animationDuration) / animationDuration;
-
 	renderer.render(scene, camera);
 
 	if (rocket) {
@@ -240,7 +233,7 @@ const loop = () => {
 		rocket.rotation.y += 0.05;
 	}
 
-	particules.forEach((obj) => {
+	particles.forEach((obj) => {
 		obj.position.y -= 6;
 		if (obj.position.y < -200) obj.position.y = 1000;
 	});
@@ -253,8 +246,8 @@ const loop = () => {
 			planet.position.y = planets_metadata[index].y;
 		}
 	});
-	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects(planets, true);
+	ray_caster.setFromCamera(mouse, camera);
+	let intersects = ray_caster.intersectObjects(planets, true);
 
 	if (intersects.length > 0) {
 		document.body.style.cursor = 'pointer';
@@ -276,8 +269,8 @@ function onDocumentMouseMove(event) {
 function onDocumentMouseClick(event) {
 	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects(planets, true);
+	ray_caster.setFromCamera(mouse, camera);
+	let intersects = ray_caster.intersectObjects(planets, true);
 
 	if (intersects.length > 0 && scene.children.length > 0) {
 		while (
