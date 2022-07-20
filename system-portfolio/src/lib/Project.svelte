@@ -96,13 +96,13 @@
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		text-decoration: none;
-		background: blue;
+		background: rgba(238, 174, 202, 1);
 		vertical-align: center;
 		border-radius: 20px;
 	}
 
 	.github-link:hover {
-		background: rgba(0, 0, 255, 0.4);
+		background: rgba(238, 174, 202, 0.7);
 	}
 
 	#next {

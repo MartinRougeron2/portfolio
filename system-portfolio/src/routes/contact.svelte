@@ -64,11 +64,7 @@
 			#11e8bb 0%,
 			#8200c9 100%
 		); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(
-			to bottom,
-			#11e8bb 0%,
-			#8200c9 100%
-		); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
 		overflow: hidden;
 	}
 

@@ -133,16 +133,16 @@ for (var i = 0; i < 1000; i++) {
 
 lights[0] = new THREE.DirectionalLight(0xffffff, 0.6);
 lights[0].position.set(1, 0, 0);
-lights[1] = new THREE.DirectionalLight(0x11e8bb, 0.6);
+lights[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
 lights[1].position.set(0.75, 1, 0.5);
-lights[2] = new THREE.DirectionalLight(0x8200c9, 0.6);
+lights[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
 lights[2].position.set(-0.75, -1, 0.5);
 
 lightsSide[0] = new THREE.DirectionalLight(0xffffff, 0.6);
 lightsSide[0].position.set(1, 0, 0);
-lightsSide[1] = new THREE.DirectionalLight(0x11e8bb, 0.6);
+lightsSide[1] = new THREE.DirectionalLight(0x1cc1eb, 0.6);
 lightsSide[1].position.set(0.75, 1, 0.5);
-lightsSide[2] = new THREE.DirectionalLight(0x8200c9, 0.6);
+lightsSide[2] = new THREE.DirectionalLight(0xe81e76, 0.6);
 lightsSide[2].position.set(-0.75, -1, 0.5);
 
 scene_index.add(sun);

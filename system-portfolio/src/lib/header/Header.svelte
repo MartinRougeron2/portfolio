@@ -13,7 +13,7 @@
 
 <style>
 	header {
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		color: white;
 		font-weight: 900;
@@ -25,6 +25,7 @@
 		font-family: Arial, Helvetica, sans-serif;
 		-webkit-backdrop-filter: blur(10px);
 		backdrop-filter: blur(10px);
+		top: 0;
 	}
 
 	#contact {

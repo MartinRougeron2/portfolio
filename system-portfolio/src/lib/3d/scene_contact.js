@@ -211,13 +211,13 @@ const handleWindowResize = () => {
 };
 
 const createLights = () => {
-	const ambientLight = new THREE.HemisphereLight(0x404040, 0x404040, 1);
+	const ambientLight = new THREE.HemisphereLight(0x696969, 0x404040, 2);
 
-	const directionalLight = new THREE.DirectionalLight(0xdfebff, 1);
-	directionalLight.position.set(-300, 0, 600);
+	const directionalLight = new THREE.DirectionalLight(0x1cc1eb, 1);
+	directionalLight.position.set(-400, -100, 300);
 
-	const pointLight = new THREE.PointLight(0x5517ff, 2, 1000, 2);
-	pointLight.position.set(200, -100, 50);
+	const pointLight = new THREE.PointLight(0xe81e76, 1.5, 1000, 2);
+	pointLight.position.set(200, 0, 300);
 
 	scene.add(ambientLight, directionalLight, pointLight);
 };
@@ -279,7 +279,7 @@ function onDocumentMouseClick(event) {
 	raycaster.setFromCamera(mouse, camera);
 	var intersects = raycaster.intersectObjects(planets, true);
 
-	if (intersects.length > 0) {
+	if (intersects.length > 0 && scene.children.length > 0) {
 		while (
 			intersects[0].object.parent.name === '' ||
 			(intersects[0].object.parent.name !== '' && intersects[0].object.parent.name[0] !== 'h')

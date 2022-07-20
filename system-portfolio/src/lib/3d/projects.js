@@ -4,7 +4,7 @@ class Project {
 		this.description = description;
 		this.size = size;
 		this.year = year;
-		this.page = name.toLowerCase().replace(' ', '-');
+		this.page = 'projects#' + name.toLowerCase().replace(' ', '-');
 		this.index = index;
 	}
 }
