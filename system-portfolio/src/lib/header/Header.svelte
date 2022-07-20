@@ -1,7 +1,9 @@
 <header>
 	<div class="flex justify-between p-5" style="width: 100%">
 		<h1 id="name">
-			<a href="/" class=""> Martin Rougeron </a>
+			<a href="/" class="">
+				Martin <div class="surname">&nbsp; Rougeron</div>
+			</a>
 		</h1>
 		<div id="contact-container" class="flex flex-row-reverse pr-3">
 			<div id="contact">
@@ -128,5 +130,10 @@
 
 	#name a:active {
 		text-shadow: 1px 1px 20px white;
+	}
+	@media only screen and (max-width: 800px) {
+		.surname {
+			display: none;
+		}
 	}
 </style>

@@ -24,13 +24,13 @@
 </script>
 
 <section>
-	<div class="project p-4 md:bot sm:bot xs:bot">
+	<div class="project pos p-4">
 		{#if projectSelected}
 			<div class="card">
 				<div class="title p-2 flex justify-between">
 					{projectSelected.name}
 					<button
-						class="mr-3 title lg:invisible xl:invisible 2xl:invisible"
+						class="mr-3 little-title lg:invisible xl:invisible 2xl:invisible"
 						on:click={nextProject}
 						id="next"
 					>
@@ -72,10 +72,15 @@
 		transition: color 0.2s linear;
 		border: 1px solid white;
 		border-radius: 5px;
+	}
+	.pos {
 		top: 25vh;
 	}
-	.bot {
-		bottom: 1vh;
+	@media only screen and (max-width: 1000px) {
+		.pos {
+			bottom: 20px;
+			top: auto;
+		}
 	}
 	.title {
 		font-weight: 900;
@@ -107,5 +112,9 @@
 
 	#next {
 		text-decoration: white solid underline;
+	}
+
+	.little-title {
+		font-size: 1.2rem;
 	}
 </style>

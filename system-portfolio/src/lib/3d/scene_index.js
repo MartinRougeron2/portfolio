@@ -189,10 +189,17 @@ const animate = () => {
 	if (animation) {
 		camera.position.y -= speeds(camera.position.y);
 		camera.position.z -= speeds(camera.position.z);
-		if (camera.position.y <= 50) {
-			animation = false;
-		}
 		camera.lookAt(0, 0, 0);
+		if (window.screen.width > 1000) {
+			if (camera.position.y <= 50) {
+				animation = false;
+			}
+		} else {
+			if (camera.position.y <= 100) {
+				animation = false;
+			}
+			camera.lookAt(10, 0, 20);
+		}
 	}
 
 	raycaster.setFromCamera(mouse, camera);

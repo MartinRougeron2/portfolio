@@ -6,7 +6,15 @@
 		{
 			image: 'area.png',
 			link: '/',
-			skills: ['Express', 'GraphQL', 'React', 'Backend Architecture', 'User Authentification', 'Web Security', 'UI/UX'],
+			skills: [
+				'Express',
+				'GraphQL',
+				'React',
+				'Backend Architecture',
+				'User Authentification',
+				'Web Security',
+				'UI/UX'
+			],
 			id: 'area',
 			name: 'Area',
 			description:
@@ -116,9 +124,9 @@
 							<circle cx="45" cy="21" r="20" stroke="white" stroke-width="3" fill="transparent" />
 						</svg>
 					</div>
-					{#if (index !== projects.length - 1)}
-					<div class="timeline" />
-						{/if}
+					{#if index !== projects.length - 1}
+						<div class="timeline" />
+					{/if}
 				</div>
 				<ProjectDetail
 					name={project.name}

@@ -81,4 +81,10 @@
 		letter-spacing: 0.1em;
 		text-decoration: none;
 	}
+
+	@media only screen and (max-width: 800px) {
+		.media {
+			bottom: 20px;
+		}
+	}
 </style>
