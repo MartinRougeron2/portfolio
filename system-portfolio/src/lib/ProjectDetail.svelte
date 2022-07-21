@@ -70,6 +70,10 @@
 		.description {
 			font-size: 1.4rem;
 		}
+		li {
+			font-size: 1rem;
+			width: 90vw;
+		}
 		.title {
 			font-size: 2rem;
 		}
@@ -82,6 +86,7 @@
 	}
 
 	.separator {
+		height: 100%;
 		border: 1px solid white;
 		width: 100%;
 	}
