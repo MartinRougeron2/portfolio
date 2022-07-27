@@ -1,6 +1,6 @@
 # My portfolio
 
-A Three app
+My different projects presented like a solar system.
 
 ## Install the dependencies
 ```bash
