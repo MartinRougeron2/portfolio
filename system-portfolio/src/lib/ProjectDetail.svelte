@@ -19,7 +19,7 @@
 				{description}
 			</div>
 			<div class="py-4" style="width: 65px">
-				<a href={link}>
+				<a href={link} target="_blank">
 					<img src="/github.png" alt="Github Link" />
 				</a>
 			</div>

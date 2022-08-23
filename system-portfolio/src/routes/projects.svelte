@@ -1,11 +1,11 @@
 <script>
 	import ProjectDetail from '../lib/ProjectDetail.svelte';
-	import { onMount } from 'svelte';
+	import Saos from "saos";
 
 	let projects = [
 		{
 			image: 'area.png',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/Area',
 			skills: [
 				'Express',
 				'GraphQL',
@@ -18,65 +18,66 @@
 			id: 'area',
 			name: 'Area',
 			description:
-				'My own Zapier. With 4 other tek students, we build an action-reaction website. You want to send an email each time you send a discord message ? Done ! You want to create an event each time you receive a Slack message ? Done !'
+				'Focus on automation between systems. The aim is to reproduce a tool such as Zapier or IFTTT by using APIs from different internet services, such as Deezer, Gmail or the school\'s intranet, in order to interconnect them. I implement a software architecture that is flexible and robust enough to allow implementations, and choose the appropriate application and web technologies.'
 		},
 		{
 			image: 'dashboard.png',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/DashboardEpitech',
 			skills: ['VueJS', 'Express', 'Web Scrapping', 'OAuth 2'],
 			id: 'dashboard',
 			name: 'Dashboard',
 			description:
-				'You want to have a website featuring your most wanted apps ? The Dashboard ! Add Widgets to listen to Spotify, get some recipies, some cools pictures !'
+				'As part of this project, you will take on the role of a Software Architect.Your main goal is neither reinventing the wheel nor writing numerous lines of code. On the contrary, yourmain action is to understand, select and integrate a wide range of existing libraries.The code you write will only implement the so-called business logic. In other words, your main job will be to write glue between selected software components to complete the requested project.'
 		},
 		{
 			image: 'babel.jpg',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/DashboardEpitech',
 			skills: ['C++', 'Network', 'Compressing Packages', 'TCP/UDP'],
 			id: 'babel',
 			name: 'Babel',
 			description:
-				"o you know Skype ? Do you know it's possible to create your version ? With 2 friends, we create a voIP system in 1 month."
+				"The babel is an Epitech project who's goal is to create a VoIP protocol and implement it in c++. The project should be cross platform (windows/linux) and consists of a server and a client. The server connects clients between them and handle messages/commands, but the voice communication should be done in p2p using udp between two clients."
 		},
 		{
 			image: 'bomberman.jpg',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/Indie',
 			skills: ['C++', 'Network', 'Game Design'],
 			id: 'bomberMan',
 			name: 'BomberMan',
 			description:
-				'Bomberman is one of the most fun game, but you need to be on the same computer to play (at its release) ... So we create a multi player game and playable from 1 to 4 by network. '
+				'\n' +
+				'Realization of a Bomberman working with different types of 2D and 3D graphics rendering. We develop a local multiplayer mode. This project is an opportunity to use libraries and to work on the architecture of a complex and modular project. To enhance the multiplayer experience we create a multi player game in LAN and playable from 1 to 4 by network. '
 		},
 		{
 			image: 'plazza.png',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/Plazza',
 			skills: ['C++', 'Multi-Thread', 'Algorithms'],
 			id: 'plazza',
 			name: 'Plazza',
-			description: 'Your own pizzeria with a multithreading kitchen'
+			description: 'The purpose of this project is to make you realize a simulation of a pizzeria, which is composed of thereception that accepts new commands, of several kitchens, themselves with several cooks, themselvescooking several pizzas.You will learn to deal with various problems, including load balancing, process and thread synchronizationand communication.'
 		},
 		{
 			image: 'nanotek.png',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/Tekspice',
 			skills: ['C++', 'Software Architecture', 'Documentation'],
 			id: 'nanotekSpice',
 			name: 'NanotekSpice',
 			description:
-				'A C++ project to simulate a hardware piece working…ive a model, some input and simulate the output !'
+				'The project : Nanotekspice is a logic simulator that builds a graph (the nodes of which will be simulated digital electronic components, inputs or outputs) from a configuration file, and injects values into that graph to get result.'
 		},
 		{
 			image: 'rpg.png',
-			link: '/',
+			link: 'https://github.com/MartinRougeron2/myRPG',
 			skills: ['C', 'Game Design', 'Team Management'],
 			id: 'my-rpg',
 			name: 'My RPG',
 			description:
-				'ur own RPG Game ! Fight monsters, dragons and more to get 3 artifacts to free your village. My most fun work.'
+				'My_rpg is a creative project, indeed, the goal is to create a true, RPG game. With 3 other people, we create "Ghost of Lies". It happens in a medieval/fantasy world.'
 		},
 		{
 			image: 'me.jpg',
 			link: '/',
-			skills: ['C++', 'Network', 'Security'],
+			skills: ['C/C++', 'VueJS', 'Management', 'Django', 'Python', 'Network', 'Security'],
 			id: 'about-me',
 			name: 'About me',
 			description:
@@ -84,23 +85,6 @@
 		}
 	];
 
-	let oldScroll = 0;
-	let index = 0;
-	let lastevt = 0;
-
-	onMount(() => {
-		window.addEventListener('scroll', (evt) => {
-			if (!(lastevt + 200 < evt.timeStamp) || Math.abs(window.scrollY - oldScroll) < 50) return;
-			lastevt = evt.timeStamp;
-			if (window.scrollY < oldScroll) {
-				index -= !!index;
-			} else {
-				index += index < projects.length - 1;
-			}
-			oldScroll = window.scrollY;
-			evt.stopPropagation();
-		});
-	});
 </script>
 
 <svelte:head>
@@ -123,16 +107,18 @@
 						</svg>
 					</div>
 					{#if index !== projects.length - 1}
-						<div class="timeline" />
+						<div class="timeline" ></div>
 					{/if}
 				</div>
-				<ProjectDetail
-					name={project.name}
-					description={project.description}
-					skills={project.skills}
-					link={project.link}
-					image={project.image}
-				/>
+				<Saos animation={'slide-in-elliptic-top-fwd 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
+					<ProjectDetail
+						name={project.name}
+						description={project.description}
+						skills={project.skills}
+						link={project.link}
+						image={project.image}
+					/>
+				</Saos>
 			</div>
 		{/each}
 	</div>
@@ -158,4 +144,17 @@
 	.id {
 		transform: translateY(-50px);
 	}
+
+	@keyframes -global-slide-in-elliptic-top-fwd {
+    0% {
+      transform: translateY(-600px) rotateX(-30deg) scale(0);
+      transform-origin: 50% 100%;
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) rotateX(0) scale(1);
+      transform-origin: 50% 1400px;
+      opacity: 1;
+    }
+  }
 </style>
