@@ -1,11 +1,11 @@
 <header>
-	<div class="flex justify-between p-5" style="width: 100%">
+	<div class="flex justify-between p-5" style="max-width: 100vw !important;">
 		<h1 id="name">
 			<a href="/" class="">
 				Martin <div class="surname">&nbsp; Rougeron</div>
 			</a>
 		</h1>
-		<div id="contact-container" class="flex flex-row-reverse pr-3">
+		<div id="contact-container" class="flex flex-row-reverse">
 			<div id="contact">
 				<a href="/contact">Contact</a>
 			</div>
@@ -28,6 +28,7 @@
 		-webkit-backdrop-filter: blur(10px);
 		backdrop-filter: blur(10px);
 		top: 0;
+		z-index: 1;
 	}
 
 	#contact {
@@ -134,6 +135,12 @@
 	@media only screen and (max-width: 800px) {
 		.surname {
 			display: none;
+		}
+		header {
+			font-size: 1.3rem;
+			max-width: 100vw !important;
+			background: white;
+			color: #94bbe9;
 		}
 	}
 </style>

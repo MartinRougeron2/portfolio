@@ -4,13 +4,16 @@
 	import linkedin from '../lib/3d/models/linkedin.js';
 	import github from '../lib/3d/models/github.js';
 	import discord from '../lib/3d/models/discord.js';
+	import rocket from '../lib/3d/models/rocket.js';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing';
 
 	let el;
 
 	onMount(() => {
-		main(el, window, { Linkedin: linkedin, Github: github, Discord: discord });
+		main(el, window, {
+			Linkedin: linkedin, Github: github, Discord: discord, rocket: rocket
+		});
 		Sentry.init({
 			dsn: 'https://dd9ebc11dc764361a9445b261d535b23@o1322275.ingest.sentry.io/6579376',
 			integrations: [new BrowserTracing()],

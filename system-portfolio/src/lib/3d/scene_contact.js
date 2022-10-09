@@ -65,7 +65,7 @@ const createScene = (el, window) => {
 	window.addEventListener('resize', handleWindowResize, false);
 
 	let loader = new GLTFLoader();
-	loader.load('https://www.stivaliserna.com/assets/rocket/rocket.gltf', (gltf) => {
+	loader.parse(models["rocket"], '', (gltf) => {
 		rocket = gltf.scene;
 		rocket.position.y = -400;
 		scene.add(rocket);

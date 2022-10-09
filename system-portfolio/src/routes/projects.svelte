@@ -2,6 +2,8 @@
 	import ProjectDetail from '../lib/ProjectDetail.svelte';
 	import Saos from "saos";
 
+	let width = 0;
+
 	let projects = [
 		{
 			image: 'area.png',
@@ -96,10 +98,11 @@
 </svelte:head>
 
 <section>
-	<div id="all">
+	<div id="all" bind:clientWidth={width}>
 		{#each projects as project, index}
 			<div id="{project.id}" class="id"></div>
 			<div class="flex flex-row">
+				{#if width > 800}
 				<div class="timeline-full">
 					<div>
 						<svg height="42" width="80">
@@ -110,6 +113,7 @@
 						<div class="timeline" ></div>
 					{/if}
 				</div>
+				{/if}
 				<Saos animation={'slide-in-elliptic-top-fwd 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
 					<ProjectDetail
 						name={project.name}
@@ -127,7 +131,7 @@
 <style>
 	#all {
 		padding-top: 100px;
-		background: linear-gradient(0deg, rgba(238, 174, 202, 0.52) 0%, #94bbe9 100%);
+		background: #94bbe9;
 	}
 	.timeline {
 		position: absolute;
