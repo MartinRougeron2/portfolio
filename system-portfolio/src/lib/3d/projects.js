@@ -52,7 +52,8 @@ let projects = [
 		2,
 		4
 	),
-	new Project('Plazza', 'Your own pizzeria with a multithreading kitchen', 3, 2, 5)
+	new Project('Plazza', 'Your own pizzeria with a multithreading kitchen', 3, 2, 5),
+	new Project('Boheme', 'Boheme is my final study project, founded with friends the goal is to ease the travel with our tools. I\'m currently the head of AI and I manage 2 people in my team.', 8, 4, 7),
 ];
 
 let sun = new Project(

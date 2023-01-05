@@ -34,7 +34,7 @@
 		</div>
 		<div class="gallery p-5 ml-5 grid grid-cols-1 justify-center">
 			<div class="flex justify-center image">
-				<img class="grow m-3" src={image} style="border-radius: 3px;" alt="{name} illustration" />
+				<img class="m-3" src={image} style="border-radius: 3px;" alt="{name} illustration" />
 			</div>
 			<div class="description 2xl:m-4 2xl:m-4 xl:m-3 sm:m-1" style="width: auto; padding-left: 15px">
 				<ul>

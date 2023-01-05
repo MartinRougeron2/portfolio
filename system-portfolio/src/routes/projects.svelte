@@ -6,6 +6,25 @@
 
 	let projects = [
 		{
+			image: 'boheme.png',
+			link: 'https://github.com/MartinRougeron2/',
+			skills: [
+				'Machine Learning',
+				'Deep Learning',
+				'Data Science',
+				'FastAPI',
+				'Webscraping',
+				'Security',
+			],
+			id: 'boheme',
+			name: 'Boheme',
+			description:
+				'Creation and implementation of AI models for Boheme.\n' +
+				'The purpose of the models is to offer products related to the preferences of the user.\n' +
+				'This position allows me to familiarize myself with data collection, cleaning and modeling.\n' +
+				'Also, I trained machine learning and deep learning models to predict the preferences of the user.\n'
+		},
+		{
 			image: 'area.png',
 			link: 'https://github.com/MartinRougeron2/Area',
 			skills: [
@@ -114,7 +133,7 @@
 					{/if}
 				</div>
 				{/if}
-				<Saos animation={'slide-in-elliptic-top-fwd 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
+				<Saos once animation={'slide-in-elliptic-top-fwd 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'} >
 					<ProjectDetail
 						name={project.name}
 						description={project.description}

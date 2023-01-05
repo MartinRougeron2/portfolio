@@ -10,6 +10,7 @@
 	//import pizza from '$lib/3d/models/pizza.js';
 	import sword from '$lib/3d/models/sword.js';
 	import web from '$lib/3d/models/web.js';
+	import bag from '$lib/3d/models/travel_bag.js';
 	import * as Sentry from '@sentry/browser';
 	import { BrowserTracing } from '@sentry/tracing';
 
@@ -36,7 +37,8 @@
 		new ProjectDecoration(chart, { x: 0, y: 6, z: 0 }, 10, 3),
 		new ProjectDecoration(chip, { x: -3, y: -3, z: 22 }, 0.2, 5),
 		//new ProjectDecoration(pizza, { x: 0, y: 6, z: 0 }, 1, 6),
-		new ProjectDecoration(cap, { x: 0, y: 10, z: 0 }, 2, -1)
+		new ProjectDecoration(cap, { x: 0, y: 10, z: 0 }, 2, -1),
+		new ProjectDecoration(bag, { x: 0, y: 8, z: 0 }, 4, 7),
 	];
 
 	onMount(() => {

@@ -181,6 +181,7 @@ function init() {
 	scene_index.add(new Circle(15 * dist).line);
 	scene_index.add(new Circle(25 * dist).line);
 	scene_index.add(new Circle(35 * dist).line);
+	scene_index.add(new Circle(45 * dist).line);
 	scene_index.add(particle);
 	scene_index.add(lights[0]);
 	scene_index.add(lights[1]);
@@ -223,9 +224,9 @@ const animate = () => {
 		camera.position.z -= speeds(camera.position.z);
 		camera.lookAt(0, 0, 0);
 		if (window.screen.width > 1000) {
-			if (camera.position.y <= 50 || loaded) {
+			if (camera.position.y <= 60 || loaded) {
 				animation = false;
-				camera.position.y = 50;
+				camera.position.y = 60;
 			}
 		} else {
 			if (camera.position.y <= 100 || loaded) {
