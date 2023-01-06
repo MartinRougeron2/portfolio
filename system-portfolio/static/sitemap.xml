@@ -4,21 +4,19 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-
 <url>
   <loc>https://www.martinrougeron.me/</loc>
-  <lastmod>2022-07-19T12:00:00+00:00</lastmod>
+  <lastmod>2023-01-01T12:00:00+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.martinrougeron.me/contact</loc>
-  <lastmod>2022-07-19T12:00:00+00:00</lastmod>
-  <priority>0.80</priority>
+  <lastmod>2023-01-01T12:00:00+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.martinrougeron.me/projects</loc>
-  <lastmod>2022-07-19T12:00:00+00:00</lastmod>
-  <priority>0.90</priority>
+  <lastmod>2023-01-01T12:00:00+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 </urlset>

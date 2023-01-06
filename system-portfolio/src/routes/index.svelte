@@ -82,7 +82,9 @@
 
 <svelte:head>
 	<title>Martin Rougeron Portfolio</title>
-	<meta name="description" content="My different projects presented like a solar system" />
+	<meta name="description" content="Martin Rougeron Portfolio. This is my portfolio showcasing my projects and skills. You can find my contact information and my social media links.">
+	<meta name="keywords" content="Martin Rougeron, Portfolio, Projects, Skills, Contact, Social Media">
+	<meta name="author" content="Martin Rougeron">
 </svelte:head>
 
 <section>
