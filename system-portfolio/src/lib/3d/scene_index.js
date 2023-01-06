@@ -286,7 +286,7 @@ function onDocumentMouseMove(event) {
 }
 
 function onDocumentMouseClick(event) {
-	if (event.toElement.id === 'next' || event.toElement.id === 'about') return;
+	if (event.toElement.id === 'about') return;
 	mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 	raycaster.setFromCamera(mouse, camera);
@@ -306,6 +306,9 @@ function onDocumentMouseClick(event) {
 		}
 		intersects[0].object.material.color.set(0xffffff);
 		localStorage.setItem('project', JSON.stringify(selected.userData));
+	} else if (event.toElement.id === 'next') {
+		// next
+		return;
 	} else {
 		selected = null;
 	}

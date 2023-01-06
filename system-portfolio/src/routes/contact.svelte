@@ -39,7 +39,7 @@
 </svelte:head>
 
 <section>
-	<canvas bind:this={el} />
+	<canvas bind:this={el}></canvas>
 	<div class="media 2xl:invisible xl:invisible lg:invisible">
 		<a
 			class="my-5"

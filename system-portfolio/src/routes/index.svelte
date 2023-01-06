@@ -93,7 +93,7 @@
 			{loadingText}
 		</div>
 		<div style={display}>
-			<canvas bind:this={el} />
+			<canvas bind:this={el}></canvas>
 		</div>
 		<div style={animation ? 'display: none' : ''}>
 			<Project />

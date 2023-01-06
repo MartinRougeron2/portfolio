@@ -150,7 +150,7 @@
 <style>
 	#all {
 		padding-top: 100px;
-		background: #94bbe9;
+
 	}
 	.timeline {
 		position: absolute;

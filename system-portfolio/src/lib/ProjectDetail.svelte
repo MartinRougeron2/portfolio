@@ -17,13 +17,11 @@
 				<div class="grid justify-items-stretch">
 					{name}
 				</div>
-				{#if width > 800}
 				<div class="grid justify-items-stretch flex items-center">
 					<a href={link} target="_blank">
 						<img src="/github.png" alt="Github Link" style="width: min(64px, 10vw)" />
 					</a>
 				</div>
-					{/if}
 			</div>
 				<div class="container-separator">
 					<div class="separator"></div>
@@ -85,13 +83,23 @@
 		display: none;
 	}
 
+	.separator {
+		height: 100%;
+		border: 1px solid white;
+		width: 100%;
+	}
+
+	ul {
+		list-style-type: '➜ ';
+	}
+
 	@media only screen and (max-width: 800px) {
 		.description {
 			font-size: 1.2rem;
 		}
 		li {
 			font-size: 1.2rem;
-			width: 90vw;
+			width: 70vw;
 		}
 		.title {
 			font-size: 2rem;
@@ -102,23 +110,25 @@
 		}
 		section {
 			padding: 10px;
-		}
-		.image-mobile {
-			display: inline;
-			width: 85vw;
+			margin: 20px;
+			min-height: 100%;
+			background: rgba(255, 255, 255, 0.1);
+			backdrop-filter: blur(3px);
+			transition: color 0.2s linear;
+			border: 1px solid white;
+			border-radius: 5px;
 		}
 		.image {
 			display: none;
 		}
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style-type: '# ';
+		}
 	}
 
-	.separator {
-		height: 100%;
-		border: 1px solid white;
-		width: 100%;
-	}
 
-	ul {
-		list-style-type: '➜ ';
-	}
 </style>
